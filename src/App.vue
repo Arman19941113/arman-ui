@@ -18,21 +18,29 @@
     @import "~@/css/reset.css";
     @import "~@/css/variable.css";
     #app {
+        position: relative;
+        top: 64px;
         display: flex;
         flex-flow: column;
-        height: 100vh;
-        padding-top: 64px;
-        overflow: auto;
+        height: calc(100vh - 64px);
         font-size: 16px;
-        color: $fontColorMain;
-        background: $backgroundColor;
+        color: $fontColor;
+        background: $whiteColor;
         .app-main {
             display: flex;
             height: 100%;
             .app-content {
-                height: 100%;
-                width: calc(100% - 256px);
                 padding: 20px 40px 40px;
+                width: calc(100% - 256px);
+                height: 100%;
+                overflow: auto;
+                &::-webkit-scrollbar {
+                    width: 8px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    border-radius: 4px;
+                    background-color: $borderColor;
+                }
             }
         }
     }

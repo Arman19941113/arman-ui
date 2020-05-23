@@ -39,7 +39,7 @@
         .left-header {
             width: 256px;
             padding: 0 24px;
-            border-right: 1px solid $borderColor;
+            border-right: 1px solid $borderColorLight;
         }
         .right-header {
             width: calc(100% - 256px);
