@@ -58,8 +58,8 @@
                         left: 0;
                         bottom: 0;
                         width: 100%;
-                        height: 2px;
-                        border-radius: 1px;
+                        height: 3px;
+                        border-radius: 1.5px;
                         background-color: $primaryColor;
                         content: '';
                         transform: scaleX(0);
@@ -69,7 +69,7 @@
                         color: $primaryColor;
                         transition: all .3s;
                         &::after {
-                            transform: scaleX(1);
+                            transform: scaleX(.7);
                             transition: all .3s;
                         }
                     }

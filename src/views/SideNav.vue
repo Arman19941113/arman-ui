@@ -60,18 +60,8 @@
             transition: all .3s;
             &.router-link-exact-active {
                 color: $primaryColor;
-                background-color: #E6F7FF;
+                background-color: $lightColor;
                 transition: all .3s;
-                &::after {
-                    display: block;
-                    content: '';
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                    width: 3px;
-                    height: 100%;
-                    background-color: $primaryColor;
-                }
             }
         }
     }
