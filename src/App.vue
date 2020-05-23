@@ -4,13 +4,8 @@
 </template>
 
 <script lang="ts">
-    import AppHeader from '@/views/AppHeader.vue'
-
     export default {
         name: 'App',
-        components: {
-            AppHeader,
-        },
     }
 </script>
 

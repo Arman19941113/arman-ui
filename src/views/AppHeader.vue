@@ -15,7 +15,9 @@
 </template>
 
 <script lang="ts">
-    export default {}
+    export default {
+        name: 'AppHeader',
+    }
 </script>
 
 <style>

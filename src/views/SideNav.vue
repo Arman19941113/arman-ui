@@ -15,6 +15,7 @@
 
 <script lang="ts">
     export default {
+        name: 'SideNav',
         props: {
             groups: {
                 type: Array,
