@@ -17,5 +17,5 @@ function formatBytes (a, b = 2) {
 }
 
 module.exports = {
-    formatBytes
+    formatBytes,
 }

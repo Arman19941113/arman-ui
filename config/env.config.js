@@ -7,13 +7,13 @@ module.exports = function (webpackEnv) {
     if (webpackEnv === 'development') {
         return {
             port: 7777,
-            host: 'localhost'
+            host: 'localhost',
         }
     } else if (webpackEnv === 'production') {
         return {
             outputPath: join('build'),
             publicPath: '/',
-            useSourceMap: false
+            useSourceMap: false,
         }
     }
 }

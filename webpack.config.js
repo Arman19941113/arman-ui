@@ -16,7 +16,7 @@ module.exports = function (webpackEnv) {
     return {
         mode: webpackEnv,
         entry: {
-            main: join('src/main.ts')
+            main: join('src/main.ts'),
         },
         output: {
             path: isProduction ? envConfig.outputPath : join('server'),
@@ -26,27 +26,20 @@ module.exports = function (webpackEnv) {
         resolve: {
             modules: [join('node_modules')],
             extensions: ['.ts', '.js', '.json'],
-            alias: { '@': join('src'), 'vue$': 'vue/dist/vue.esm-bundler.js', }
+            alias: { '@': join('src'), 'vue$': 'vue/dist/vue.esm-bundler.js' },
         },
         devtool: isProduction && envConfig.useSourceMap && 'source-map',
         optimization: {
             splitChunks: {
                 minSize: 30000,
                 cacheGroups: {
-                    // jquery: {
-                    //     test: /[\\/]node_modules[\\/]jquery/,
-                    //     name: 'jquery',
-                    //     chunks: 'all',
-                    //     priority: 1,
-                    //     reuseExistingChunk: true,
-                    // },
                     vendor: {
                         test: /[\\/]node_modules[\\/]/,
                         name: 'vendors',
                         chunks: 'all',
-                    }
-                }
-            }
+                    },
+                },
+            },
         },
         plugins: [
             new HtmlWebpackPlugin({
@@ -56,15 +49,29 @@ module.exports = function (webpackEnv) {
             }),
             isProduction && new MiniCssExtractPlugin({
                 filename: 'static/css/[name].[contenthash:8].css',
-                chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
+                chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
             }),
-            new VueLoaderPlugin()
+            new VueLoaderPlugin(),
         ].filter(Boolean),
         module: {
             rules: [
                 {
+                    test: /\.md$/,
+                    use: [
+                        {
+                            loader: 'vue-loader',
+                        },
+                        {
+                            loader: 'vue-markdown-loader/lib/markdown-compiler',
+                            options: {
+                                raw: true,
+                            },
+                        },
+                    ],
+                },
+                {
                     test: /\.vue$/,
-                    loader: 'vue-loader'
+                    loader: 'vue-loader',
                 },
                 {
                     test: /\.tsx?$/,
@@ -75,18 +82,18 @@ module.exports = function (webpackEnv) {
                             options: {
                                 cacheDirectory: true,
                                 presets: ['@babel/preset-env'],
-                                plugins: ['@babel/plugin-transform-runtime']
-                            }
+                                plugins: ['@babel/plugin-transform-runtime'],
+                            },
                         },
                         {
                             loader: 'ts-loader',
                             options: {
                                 transpileOnly: true,
                                 appendTsSuffixTo: ['\\.vue$'],
-                                happyPackMode: false
-                            }
-                        }
-                    ]
+                                happyPackMode: false,
+                            },
+                        },
+                    ],
                 },
                 {
                     test: /\.m?js$/,
@@ -96,9 +103,9 @@ module.exports = function (webpackEnv) {
                         options: {
                             cacheDirectory: true,
                             presets: ['@babel/preset-env'],
-                            plugins: ['@babel/plugin-transform-runtime']
-                        }
-                    }
+                            plugins: ['@babel/plugin-transform-runtime'],
+                        },
+                    },
                 },
                 {
                     test: /\.css$/,
@@ -107,8 +114,8 @@ module.exports = function (webpackEnv) {
                         {
                             loader: 'css-loader',
                             options: {
-                                importLoaders: 1
-                            }
+                                importLoaders: 1,
+                            },
                         },
                         {
                             loader: 'postcss-loader',
@@ -116,15 +123,15 @@ module.exports = function (webpackEnv) {
                                 plugins: [
                                     require('postcss-import')({
                                         resolve: createResolver({
-                                            alias: { '~@': join('src') }
-                                        })
+                                            alias: { '~@': join('src') },
+                                        }),
                                     }),
                                     require('precss'),
-                                    require('cssnano')
-                                ]
-                            }
-                        }
-                    ]
+                                    require('cssnano'),
+                                ],
+                            },
+                        },
+                    ],
                 },
                 {
                     test: /\.(bmp|gif|jpe?g|png|svg)$/,
@@ -133,9 +140,9 @@ module.exports = function (webpackEnv) {
                         options: {
                             limit: 10000,
                             esModule: false,
-                            name: 'static/images/[name].[hash:8].[ext]'
+                            name: 'static/images/[name].[hash:8].[ext]',
                         },
-                    }
+                    },
                 },
                 {
                     test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)$/,
@@ -145,8 +152,8 @@ module.exports = function (webpackEnv) {
                             limit: 10000,
                             esModule: false,
                             name: 'static/media/[name].[hash:8].[ext]',
-                        }
-                    }
+                        },
+                    },
                 },
                 {
                     test: /\.(woff2?|eot|ttf|otf)$/,
@@ -156,14 +163,14 @@ module.exports = function (webpackEnv) {
                             limit: 10000,
                             esModule: false,
                             name: 'static/fonts/[name].[hash:8].[ext]',
-                        }
-                    }
-                }
-            ].filter(Boolean)
+                        },
+                    },
+                },
+            ].filter(Boolean),
         },
         performance: {
             maxEntrypointSize: 3000000,
-            maxAssetSize: 3000000
-        }
+            maxAssetSize: 3000000,
+        },
     }
 }

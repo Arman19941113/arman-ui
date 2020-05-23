@@ -1,19 +1,23 @@
 {
     "name": "arman-ui",
-    "version": "0.0.1",
-    "private": true,
+    "version": "2.0.0",
+    "description": "arman-ui",
+    "keywords": ["vue"],
     "scripts": {
         "start": "node scripts/start.js",
         "build": "rm -rf build && node scripts/build.js"
     },
+    "repository": "https://github.com/Arman19941113/arman-ui",
+    "homepage": "https://github.com/Arman19941113/arman-ui#readme",
+    "bugs": {
+        "url": "https://github.com/Arman19941113/arman-ui/issues",
+        "email": "td19941113@gmail.com"
+    },
+    "author": "Arman19941113",
+    "license": "MIT",
     "dependencies": {
-        "@types/js-cookie": "2.2.6",
-        "axios": "0.19.2",
-        "js-cookie": "2.2.1",
         "vue": "3.0.0-beta.14",
-        "vue-i18n": "9.0.0-alpha.2",
-        "vue-router": "4.0.0-alpha.11",
-        "vuex": "4.0.0-beta.2"
+        "vue-router": "4.0.0-alpha.11"
     },
     "devDependencies": {
         "@babel/core": "7.9.6",
@@ -37,9 +41,13 @@
         "typescript": "3.9.2",
         "url-loader": "4.1.0",
         "vue-loader": "16.0.0-beta.2",
+        "vue-markdown-loader": "^2.4.1",
         "vue-template-compiler": "2.6.11",
         "webpack": "4.43.0",
         "webpack-cli": "3.3.11 ",
         "webpack-dev-server": "3.11.0"
+    },
+    "peerDependencies": {
+        "vue": "^3.0.0-beta.14"
     }
 }

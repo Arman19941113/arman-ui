@@ -8,5 +8,5 @@ module.exports = {
     quiet: true,
     hot: true,
     open: true,
-    overlay: true
+    overlay: true,
 }

@@ -1,2 +1,9 @@
-$fontColor: #fff;
-$backgroundColor: #2B3A42;
+$fontColorMain: #333;
+$fontColorMiddle: #666;
+$fontColorLight: #999;
+
+$backgroundColor: #FFF;
+
+$borderColor: #F0F0F0;
+
+$primaryColor: #1890FF;

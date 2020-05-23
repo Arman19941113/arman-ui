@@ -1,3 +1,9 @@
 <template>
-    <img src="../assets/webpack.svg" alt="webpack">
+    <div class="home">
+        Hello world
+    </div>
 </template>
+
+<script>
+    export default {}
+</script>

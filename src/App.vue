@@ -1,18 +1,16 @@
 <template>
-    <Header />
-    <main class="main-container">
-        <router-view />
-    </main>
+    <AppHeader />
+    <router-view />
 </template>
 
 <script lang="ts">
-    import Header from '@/components/Header.vue'
+    import AppHeader from '@/views/AppHeader.vue'
 
     export default {
         name: 'App',
         components: {
-            Header
-        }
+            AppHeader,
+        },
     }
 </script>
 
@@ -20,15 +18,22 @@
     @import "~@/css/reset.css";
     @import "~@/css/variable.css";
     #app {
+        display: flex;
+        flex-flow: column;
         height: 100vh;
-        font-size: 18px;
-        color: $fontColor;
+        padding-top: 64px;
+        overflow: auto;
+        font-size: 16px;
+        color: $fontColorMain;
         background: $backgroundColor;
-        .main-container {
+        .app-main {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 400px;
+            height: 100%;
+            .app-content {
+                height: 100%;
+                width: calc(100% - 256px);
+                padding: 20px 40px 40px;
+            }
         }
     }
 </style>

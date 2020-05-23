@@ -4,5 +4,11 @@ declare module '*.vue' {
     export default component
 }
 
+declare module '*.md' {
+    import { ComponentOptions } from 'vue'
+    const component: ComponentOptions
+    export default component
+}
+
 declare var SITE_URL: string
 declare var AJAX_URL: string
