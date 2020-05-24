@@ -126,6 +126,7 @@ module.exports = function (webpackEnv) {
                                             alias: { '~@': join('src') },
                                         }),
                                     }),
+                                    require('postcss-mixins'),
                                     require('precss'),
                                     require('cssnano'),
                                 ],
