@@ -19,7 +19,7 @@
         flex-flow: column;
         height: calc(100vh - 64px);
         font-size: 16px;
-        color: $fontColor;
+        color: $fontColorNormal;
         background: $whiteColor;
         .app-main {
             display: flex;

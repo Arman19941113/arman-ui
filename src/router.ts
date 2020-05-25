@@ -9,8 +9,10 @@ import NotFound from '@/views/NotFound.vue'
 const Install = defineAsyncComponent(() => import(/* webpackChunkName: 'Install' */'@/docs/install.md'))
 const Start = defineAsyncComponent(() => import(/* webpackChunkName: 'Start' */'@/docs/start.md'))
 
+const Icon = defineAsyncComponent(() => import(/* webpackChunkName: 'Icon' */'@/components/icon/icon.md'))
 const Button = defineAsyncComponent(() => import(/* webpackChunkName: 'Button' */'@/components/button/button.md'))
-const Input = defineAsyncComponent(() => import(/* webpackChunkName: 'Input' */'@/components/Input/Input.md'))
+const Input = defineAsyncComponent(() => import(/* webpackChunkName: 'Input' */'@/components/input/input.md'))
+const Loading = defineAsyncComponent(() => import(/* webpackChunkName: 'Loading' */'@/components/loading/loading.md'))
 
 export const router = createRouter({
     history: createWebHistory(window.SITE_URL),
@@ -45,6 +47,10 @@ export const router = createRouter({
             path: '',
             redirect: { name: 'button' },
         }, {
+            path: 'icon',
+            name: 'icon',
+            component: Icon,
+        }, {
             path: 'button',
             name: 'button',
             component: Button,
@@ -52,6 +58,10 @@ export const router = createRouter({
             path: 'input',
             name: 'input',
             component: Input,
+        }, {
+            path: 'loading',
+            name: 'loading',
+            component: Loading,
         }],
     }, {
         path: '/*',

@@ -1,0 +1,153 @@
+@import "~@/css/variable.css";
+.a-button {
+    position: relative;
+    border-radius: 2px;
+    font-size: 14px;
+    height: 32px;
+    padding: 0 14px;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: color .3s, border-color .3s, background-color .3s;
+    .a-button-content {
+        display: flex;
+        align-items: center;
+        .button-icon {
+            transition: color 0.3s;
+        }
+    }
+    .a-button-loading {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .loading-icon {
+            animation: spin 1s infinite linear
+        }
+        .loading-text {
+            margin-left: 5px;
+            font-size: 14px;
+        }
+    }
+
+    &.isClicked::after {
+        display: block;content: '';
+        position: absolute;top: 0;right: 0;
+        width: 100%;height: 100%;
+        opacity: 0.3;
+        border-radius: 2px;
+        animation: fadeShadowDefault 0.3s linear;
+    }
+    &.is-round {
+        border-radius: 16px;
+        &::after {
+            border-radius: 16px;
+        }
+    }
+    &[disabled] {
+        cursor: not-allowed;
+    }
+
+    &.a-button-default {
+        color: $fontColorNormal;
+        border: 1px solid $borderColor;
+        background-color: $whiteColor;
+        &:hover, &:focus {
+            color: $primaryColor;
+            border-color: $primaryColor;
+            background-color: $whiteColor;
+            transition: color .3s, border-color .3s, background-color .3s;
+            .button-icon {
+                color: $primaryColor;
+                transition: color 0.3s;
+            }
+        }
+        &:active {
+            color: $primaryColorDark;
+            border-color: $primaryColorDark;
+            background-color: $whiteColor;
+            transition: color .3s, border-color .3s, background-color .3s;
+            .button-icon {
+                color: $primaryColorDark;
+                transition: color 0.3s;
+            }
+        }
+        &[disabled] {
+            color: $disabledColor;
+            border-color: $disabledBorderColor;
+            background: $whiteColor;
+            .button-icon {
+                color: $disabledColor;
+                transition: color 0.3s;
+            }
+        }
+    }
+
+    @define-mixin buttonTheme $theme, $light, $dark, $disabled {
+        color: $whiteColor;
+        border: 1px solid $theme;
+        background-color: $theme;
+        &.is-loading {
+            border-color: $light;
+            background-color: $light;
+        }
+        &:hover, &:focus {
+            color: $whiteColor;
+            border-color: $light;
+            background-color: $light;
+            transition: color .3s, border-color .3s, background-color .3s;
+        }
+        &:active {
+            color: $whiteColor;
+            border-color: $dark;
+            background-color: $dark;
+            transition: color .3s, border-color .3s, background-color .3s;
+        }
+        &[disabled] {
+            color: $whiteColor;
+            border-color: $disabled;
+            background: $disabled;
+        }
+    }
+    &.a-button-primary {
+        @mixin buttonTheme $primaryColor, $primaryColorLight, $primaryColorDark, $primaryColorDisabled;
+    }
+    &.a-button-success {
+        @mixin buttonTheme $successColor, $successColorLight, $successColorDark, $successColorDisabled;
+        &.isClicked::after {
+            animation-name: fadeShadowSuccess;
+        }
+    }
+    &.a-button-warning {
+        @mixin buttonTheme $warningColor, $warningColorLight, $warningColorDark, $warningColorDisabled;
+        &.isClicked::after {
+            animation-name: fadeShadowWarning;
+        }
+    }
+    &.a-button-danger {
+        @mixin buttonTheme $dangerColor, $dangerColorLight, $dangerColorDark, $dangerColorDisabled;
+        &.isClicked::after {
+            animation-name: fadeShadowDanger;
+        }
+    }
+}
+
+@keyframes fadeShadowDefault {
+    25% {box-shadow: 0 0 4px 4px $primaryColor}
+}
+@keyframes fadeShadowSuccess {
+    25% {box-shadow: 0 0 4px 4px $successColor}
+}
+@keyframes fadeShadowWarning {
+    25% {box-shadow: 0 0 4px 4px $warningColor}
+}
+@keyframes fadeShadowDanger {
+    25% {box-shadow: 0 0 4px 4px $dangerColor}
+}
+@keyframes spin {
+    0% {transform: rotate(0deg)}
+    100% {transform: rotate(360deg)}
+}
