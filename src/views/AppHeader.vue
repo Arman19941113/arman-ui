@@ -2,7 +2,9 @@
     <header class="app-header">
         <div class="left-header">
             <div class="logo">arman-ui</div>
-            <div class="github">github</div>
+            <a href="https://github.com/Arman19941113/arman-ui" target="_blank">
+                <AIcon name="github" width="24" class="github-icon" />
+            </a>
         </div>
         <div class="right-header">
             <div class="navs">
@@ -15,8 +17,11 @@
 </template>
 
 <script lang="ts">
+    import AIcon from '@/components/icon/icon.vue'
+
     export default {
         name: 'AppHeader',
+        components: { AIcon },
     }
 </script>
 
@@ -42,6 +47,14 @@
             width: 256px;
             padding: 0 24px;
             border-right: 1px solid $borderColorLight;
+            .github-icon {
+                cursor: pointer;
+                transition: color .3s;
+                &:hover {
+                    color: $primaryColor;
+                    transition: color .3s;
+                }
+            }
         }
         .right-header {
             width: calc(100% - 256px);
