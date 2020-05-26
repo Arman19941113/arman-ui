@@ -1,9 +1,10 @@
 {
     "name": "arman-ui",
-    "version": "2.0.0",
+    "private": true,
     "description": "arman-ui",
     "keywords": [
-        "vue"
+        "vue",
+        "vue3"
     ],
     "scripts": {
         "start": "node scripts/start.js",
@@ -49,8 +50,5 @@
         "webpack": "4.43.0",
         "webpack-cli": "3.3.11 ",
         "webpack-dev-server": "3.11.0"
-    },
-    "peerDependencies": {
-        "vue": "3.0.0-beta.14"
     }
 }
