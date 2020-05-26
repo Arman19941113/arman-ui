@@ -2,7 +2,7 @@
 
 加载过渡动画。
 
-## 加载类型
+## 整页加载
 <a-button theme="default" @click="handle">两秒后关闭</a-button>
 <a-loading :value="isLoading" global></a-loading>
 
