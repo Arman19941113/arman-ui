@@ -8,9 +8,11 @@
 </template>
 
 <script lang="ts">
-    import groups from '@/docs'
+    import SideNav from './SideNav.vue'
+    import groups from '../guides'
 
     export default {
+        components: { SideNav },
         setup () {
             return {
                 groups,

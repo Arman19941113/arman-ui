@@ -1,18 +1,18 @@
 import { defineAsyncComponent } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Home from '@/views/Home.vue'
-import Docs from '@/views/Docs.vue'
-import Components from '@/views/Components.vue'
-import NotFound from '@/views/NotFound.vue'
+import Home from './views/Home.vue'
+import Guides from './views/Guides.vue'
+import Components from './views/Components.vue'
+import NotFound from './views/NotFound.vue'
 
-const Install = defineAsyncComponent(() => import(/* webpackChunkName: 'Install' */'@/docs/install.md'))
-const Start = defineAsyncComponent(() => import(/* webpackChunkName: 'Start' */'@/docs/start.md'))
+const Install = defineAsyncComponent(() => import(/* webpackChunkName: 'Install' */'./guides/install.md'))
+const Start = defineAsyncComponent(() => import(/* webpackChunkName: 'Start' */'./guides/start.md'))
 
-const Icon = defineAsyncComponent(() => import(/* webpackChunkName: 'Icon' */'@/components/icon/icon.md'))
-const Button = defineAsyncComponent(() => import(/* webpackChunkName: 'Button' */'@/components/button/button.md'))
-const Input = defineAsyncComponent(() => import(/* webpackChunkName: 'Input' */'@/components/input/input.md'))
-const Loading = defineAsyncComponent(() => import(/* webpackChunkName: 'Loading' */'@/components/loading/loading.md'))
+const Icon = defineAsyncComponent(() => import(/* webpackChunkName: 'Icon' */'./components/icon.md'))
+const Button = defineAsyncComponent(() => import(/* webpackChunkName: 'Button' */'./components/button.md'))
+const Input = defineAsyncComponent(() => import(/* webpackChunkName: 'Input' */'./components/input.md'))
+const Loading = defineAsyncComponent(() => import(/* webpackChunkName: 'Loading' */'./components/loading.md'))
 
 export const router = createRouter({
     history: createWebHistory(window.SITE_URL),
@@ -24,9 +24,9 @@ export const router = createRouter({
         name: 'home',
         component: Home,
     }, {
-        path: '/docs',
-        name: 'docs',
-        component: Docs,
+        path: '/guides',
+        name: 'guides',
+        component: Guides,
         children: [{
             path: '',
             redirect: { name: 'install' },
@@ -64,11 +64,10 @@ export const router = createRouter({
             component: Loading,
         }],
     }, {
-        path: '/*',
+        path: '/:catchAll(.*)',
         name: 'notFound',
         component: NotFound,
-    },
-    ],
+    }],
     scrollBehavior (to, from, savedPosition) {
         if (savedPosition) {
             return savedPosition

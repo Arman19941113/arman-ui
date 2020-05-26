@@ -16,7 +16,7 @@ module.exports = function (webpackEnv) {
     return {
         mode: webpackEnv,
         entry: {
-            main: join('src/main.ts'),
+            main: join('example/main.ts'),
         },
         output: {
             path: isProduction ? envConfig.outputPath : join('server'),

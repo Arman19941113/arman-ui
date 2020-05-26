@@ -8,7 +8,7 @@
         </div>
         <div class="right-header">
             <div class="navs">
-                <router-link class="nav-item" to="/docs">文档</router-link>
+                <router-link class="nav-item" to="/guides">指南</router-link>
                 <router-link class="nav-item" to="/components">组件</router-link>
             </div>
             <div class="search-container">search</div>

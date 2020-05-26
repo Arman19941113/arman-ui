@@ -4,13 +4,16 @@
 </template>
 
 <script lang="ts">
+    import AppHeader from './views/AppHeader.vue'
+
     export default {
         name: 'App',
+        components: { AppHeader },
     }
 </script>
 
 <style>
-    @import "~@/css/reset.css";
+    @import "./css/reset.css";
     @import "~@/css/variable.css";
     #app {
         position: relative;
