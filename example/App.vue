@@ -13,8 +13,8 @@
 </script>
 
 <style>
-    @import "./css/reset.css";
     @import "~@/css/variable.css";
+
     #app {
         position: relative;
         top: 64px;
@@ -41,5 +41,45 @@
                 }
             }
         }
+    }
+
+    * {
+        box-sizing: border-box;
+        outline: none;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul,
+    li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    dl,
+    dt,
+    dd,
+    p {
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    td,
+    th {
+        padding: 0;
     }
 </style>
