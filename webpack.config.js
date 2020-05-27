@@ -65,6 +65,7 @@ module.exports = function (webpackEnv) {
                             loader: 'vue-markdown-loader/lib/markdown-compiler',
                             options: {
                                 raw: true,
+                                preventExtract: true,
                             },
                         },
                     ],

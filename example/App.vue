@@ -39,6 +39,22 @@
                     border-radius: 4px;
                     background-color: $borderColor;
                 }
+                code[v-pre] {
+                    display: block;
+                    line-height: 1.5;
+                    font-family: Menlo, Monaco, Consolas, Courier, monospace;
+                    font-size: 12px;
+                    padding: 12px 16px;
+                    border-radius: 4px;
+                    border: 1px solid #EAEAEA;
+                    background-color: #FAFAFA;
+                }
+                .markdown-button-container {
+                    margin-bottom: 24px;
+                    button {
+                        margin-right: 24px;
+                    }
+                }
             }
         }
     }

@@ -1,14 +1,14 @@
-# Icon 图标
-
-提供了一套常用的图标集合。
-
 <script>
     import AIcon from '@/components/icon/icon.vue';
     
     export default {
-        components: { AIcon }
+        components: { AIcon },
     };
 </script>
+
+# Icon 图标
+
+提供了一套常用的图标集合。
 
 ## 使用方法
 <AIcon name="setting" width="24" style="margin: 0 16px"></AIcon>

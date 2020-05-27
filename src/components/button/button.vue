@@ -18,11 +18,10 @@
 <script lang="ts">
     import { ComponentObjectPropsOptions, ref, computed, SetupContext } from 'vue'
     import AIcon from '@/components/icon/icon.vue'
-    import ALoading from '@/components/loading/loading.vue'
 
     export default {
         name: 'AButton',
-        components: { AIcon, ALoading },
+        components: { AIcon },
         props: {
             theme: {
                 type: String,

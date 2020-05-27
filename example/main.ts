@@ -1,3 +1,4 @@
+import 'highlight.js/styles/color-brewer.css'
 import { createApp } from 'vue'
 import { router } from './router'
 import App from './App.vue'

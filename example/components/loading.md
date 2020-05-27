@@ -1,21 +1,3 @@
-# Loading 加载中
-
-加载过渡动画。
-
-## 整页加载
-<a-button theme="default" @click="handle">两秒后关闭</a-button>
-<a-loading :value="isLoading" global></a-loading>
-
-## 加载类型
-<div style="width: 400px;height: 120px;position: relative;display: flex;justify-content: space-around;align-items: center;border: 1px solid #DCDFE6;">
-    <a-button @click="handle1">普通圆弧</a-button>
-    <a-button @click="handle2">扩散圆圈</a-button>
-    <a-button @click="handle3">四点旋转</a-button>
-    <a-loading :value="isLoading1" type="linear"></a-loading>
-    <a-loading :value="isLoading2" type="wave"></a-loading>
-    <a-loading :value="isLoading3" type="dots"></a-loading>
-</div>
-
 <script>
     import { ref } from 'vue';
     import AButton from '@/components/button/button.vue';
@@ -60,3 +42,26 @@
     }
 </script>
 
+# Loading 加载中
+
+加载过渡动画。
+
+```javascript
+const x = {
+    name: 'arman'
+}
+```
+
+## 整页加载
+<a-button theme="default" @click="handle">两秒后关闭</a-button>
+<a-loading :value="isLoading" global></a-loading>
+
+## 加载类型
+<div style="width: 400px;height: 120px;position: relative;display: flex;justify-content: space-around;align-items: center;border: 1px solid #DCDFE6;">
+    <a-button @click="handle1">普通圆弧</a-button>
+    <a-button @click="handle2">扩散圆圈</a-button>
+    <a-button @click="handle3">四点旋转</a-button>
+    <a-loading :value="isLoading1" type="linear"></a-loading>
+    <a-loading :value="isLoading2" type="wave"></a-loading>
+    <a-loading :value="isLoading3" type="dots"></a-loading>
+</div>
