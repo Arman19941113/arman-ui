@@ -1,6 +1,6 @@
 /**
  *  将文件大小标准化，并用空格填充统一长度
- *  @param {string} a 文件大小
+ *  @param {Number} a 文件大小
  *  @param {Number} b 保留有效值位数
  */
 function formatBytes (a, b = 2) {

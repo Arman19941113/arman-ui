@@ -15,8 +15,9 @@ compiler.run((error, status) => {
         console.log(chalk.red(error.message))
     } else {
         console.log(chalk.green('Compiled successfully\n'))
-        console.log(status.toJson().outputPath)
-        status.toJson().assets.forEach(item => {
+        const result = status.toJson()
+        console.log(result.outputPath)
+        result.assets.forEach(item => {
             console.log(formatBytes(item.size) + chalk.cyan(item.name))
         })
         console.log()
