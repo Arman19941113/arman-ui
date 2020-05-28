@@ -1,7 +1,7 @@
 <script>
     import { ref } from 'vue';
-    import AButton from '@/components/button/button.vue';
-    import ALoading from '@/components/loading/loading.vue';
+    import AButton from '@/components/button';
+    import ALoading from '@/components/loading';
     
     export default {
         components: { AButton, ALoading },

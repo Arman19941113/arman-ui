@@ -26,7 +26,7 @@
     }
 </script>
 
-<style scoped>
+<style>
     .a-icon {
         width: 1em;
         height: 1em;

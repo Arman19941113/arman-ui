@@ -17,7 +17,7 @@
 
 <script lang="ts">
     import { ComponentObjectPropsOptions, ref, computed, SetupContext } from 'vue'
-    import AIcon from '@/components/icon/icon.vue'
+    import AIcon from '@/components/icon'
 
     export default {
         name: 'AButton',
@@ -89,6 +89,6 @@
     }
 </script>
 
-<style scoped>
+<style>
     @import "./button.css";
 </style>

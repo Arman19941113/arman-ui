@@ -1,5 +1,5 @@
 <script>
-    import AIcon from '@/components/icon/icon.vue';
+    import AIcon from '@/components/icon';
     
     export default {
         components: { AIcon },

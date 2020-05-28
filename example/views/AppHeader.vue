@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-    import AIcon from '@/components/icon/icon.vue'
+    import AIcon from '@/components/icon'
 
     export default {
         name: 'AppHeader',

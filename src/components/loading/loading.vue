@@ -30,6 +30,7 @@
     import { ref, computed, onMounted, ComponentObjectPropsOptions, SetupContext } from 'vue'
 
     export default {
+        name: 'ALoading',
         props: {
             value: {
                 type: Boolean,
@@ -91,6 +92,6 @@
     }
 </script>
 
-<style scoped>
+<style>
     @import "./loading.css";
 </style>

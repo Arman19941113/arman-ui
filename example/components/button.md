@@ -1,6 +1,6 @@
 <script>
     import { ref } from 'vue';
-    import AButton from '@/components/button/button.vue';
+    import AButton from '@/components/button';
     
     export default {
         components: { AButton },
