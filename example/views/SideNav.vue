@@ -60,7 +60,7 @@
             transition: all .3s;
             &.router-link-exact-active {
                 color: $primaryColor;
-                background-color: $lightColor;
+                background-color: $lightBlueColor;
                 transition: all .3s;
             }
         }

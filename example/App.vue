@@ -21,7 +21,6 @@
         display: flex;
         flex-flow: column;
         height: calc(100vh - 64px);
-        font-size: 16px;
         color: $fontColorNormal;
         background: $whiteColor;
         .app-main {
@@ -39,6 +38,10 @@
                     border-radius: 4px;
                     background-color: $borderColor;
                 }
+                /* markdown 渲染样式 */
+                h1 {font-size: 1.3em;padding-bottom: 0.2em;border-bottom: 1px solid $borderColorLight;}
+                h2 {font-size: 1.2em;}
+                h3 {font-size: 1.1em;}
                 code[v-pre] {
                     display: block;
                     line-height: 1.5;
@@ -46,8 +49,30 @@
                     font-size: 12px;
                     padding: 12px 16px;
                     border-radius: 4px;
-                    border: 1px solid #EAEAEA;
-                    background-color: #FAFAFA;
+                    border: 1px solid $borderColorNormal;
+                    background-color: $lightGrayColor;
+                }
+                table {
+                    margin-bottom: 24px;
+                    width: 100%;
+                    border: 1px solid $borderColorNormal;
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                    empty-cells: show;
+                    font-size: 12px;
+                    font-family: Consolas, Menlo, Courier, monospace;
+                    th, td {
+                        padding: 8px 16px;
+                        border: 1px solid $borderColorNormal;
+                        a {
+                            color: $primaryColor;
+                            text-decoration: underline;
+                        }
+                    }
+                    th {
+                        text-align: left;
+                        background-color: $lightGrayColor;
+                    }
                 }
                 .markdown-button-container {
                     margin-bottom: 24px;

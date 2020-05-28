@@ -57,7 +57,7 @@
             },
             index: {
                 type: String,
-                default: '1000',
+                default: '2000',
             },
             background: {
                 type: String,
