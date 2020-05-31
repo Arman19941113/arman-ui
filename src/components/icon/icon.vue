@@ -4,7 +4,7 @@
     </svg>
 </template>
 
-<script lang="ts">
+<script>
     import './iconfont.js'
 
     export default {

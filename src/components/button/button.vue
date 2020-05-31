@@ -15,8 +15,8 @@
     </button>
 </template>
 
-<script lang="ts">
-    import { ComponentObjectPropsOptions, ref, computed, SetupContext } from 'vue'
+<script>
+    import { ref, computed } from 'vue'
     import AIcon from '@/components/icon'
 
     export default {
@@ -26,7 +26,7 @@
             theme: {
                 type: String,
                 default: 'default',
-                validator (value: string) {
+                validator (value) {
                     if (['default', 'primary', 'success', 'warning', 'danger'].includes(value)) {
                         return true
                     } else {
@@ -60,7 +60,7 @@
                 default: false,
             },
         },
-        setup (props: ComponentObjectPropsOptions, context: SetupContext) {
+        setup (props, context) {
             const { isClicked, handleClick } = useClickButton()
             const hasSlots = computed(() => Boolean(context.slots.default))
 

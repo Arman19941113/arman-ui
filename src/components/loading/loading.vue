@@ -26,8 +26,8 @@
     </transition>
 </template>
 
-<script lang="ts">
-    import { ref, computed, onMounted, ComponentObjectPropsOptions, SetupContext } from 'vue'
+<script>
+    import { ref, computed, onMounted } from 'vue'
 
     export default {
         name: 'ALoading',
@@ -39,7 +39,7 @@
             type: {
                 type: String,
                 default: 'default',
-                validator (value: string) {
+                validator (value) {
                     if (['default', 'linear', 'wave', 'dots'].includes(value)) {
                         return true
                     } else {
@@ -69,7 +69,7 @@
                 default: '',
             },
         },
-        setup (props: ComponentObjectPropsOptions, context: SetupContext) {
+        setup (props, context) {
             const root = ref(null)
 
             onMounted(() => {
@@ -84,8 +84,8 @@
                     height: props.width + 'px',
                 })),
                 computedSizeHalf: computed(() => ({
-                    width: props.width as number / 2 + 'px',
-                    height: props.width as number / 2 + 'px',
+                    width: props.width / 2 + 'px',
+                    height: props.width / 2 + 'px',
                 })),
             }
         },

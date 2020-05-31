@@ -7,7 +7,7 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
     import SideNav from './SideNav.vue'
     import groups from '../guides'
 

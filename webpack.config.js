@@ -16,7 +16,7 @@ module.exports = function (webpackEnv) {
     return {
         mode: webpackEnv,
         entry: {
-            main: join('example/main.ts'),
+            main: join('example/main.js'),
         },
         output: {
             path: isProduction ? envConfig.outputPath : join('server'),
@@ -25,7 +25,7 @@ module.exports = function (webpackEnv) {
         },
         resolve: {
             modules: [join('node_modules')],
-            extensions: ['.ts', '.js', '.json'],
+            extensions: ['.js', '.json'],
             alias: { '@': join('src'), 'vue$': 'vue/dist/vue.esm-bundler.js' },
         },
         devtool: isProduction && envConfig.useSourceMap && 'source-map',
@@ -73,28 +73,6 @@ module.exports = function (webpackEnv) {
                 {
                     test: /\.vue$/,
                     loader: 'vue-loader',
-                },
-                {
-                    test: /\.tsx?$/,
-                    exclude: /node_modules/,
-                    use: [
-                        {
-                            loader: 'babel-loader',
-                            options: {
-                                cacheDirectory: true,
-                                presets: ['@babel/preset-env'],
-                                plugins: ['@babel/plugin-transform-runtime'],
-                            },
-                        },
-                        {
-                            loader: 'ts-loader',
-                            options: {
-                                transpileOnly: true,
-                                appendTsSuffixTo: ['\\.vue$'],
-                                happyPackMode: false,
-                            },
-                        },
-                    ],
                 },
                 {
                     test: /\.m?js$/,

@@ -10,8 +10,8 @@
         "start": "node scripts/start.js",
         "build": "rm -rf build && node scripts/build.js",
         "dist": "gulp --gulpfile gulpfile.dist.js",
-        "dist:src": "gulp --gulpfile gulpfile.dist.js srcTask",
-        "dist:min": "gulp --gulpfile gulpfile.dist.js minTask"
+        "dist:src": "gulp --gulpfile gulpfile.dist.js iifeTaskSrc",
+        "dist:min": "gulp --gulpfile gulpfile.dist.js iifeTaskMin"
     },
     "repository": "https://github.com/Arman19941113/arman-ui",
     "homepage": "https://github.com/Arman19941113/arman-ui#readme",
@@ -33,7 +33,6 @@
         "@rollup/plugin-babel": "5.0.2",
         "@rollup/plugin-commonjs": "12.0.0",
         "@rollup/plugin-node-resolve": "8.0.0",
-        "@rollup/plugin-typescript": "4.1.2",
         "@types/webpack-env": "1.15.2",
         "@vue/compiler-sfc": "3.0.0-beta.14",
         "babel-loader": "8.1.0",
@@ -56,8 +55,6 @@
         "rollup-plugin-terser": "6.1.0",
         "rollup-plugin-vue": "6.0.0-alpha.1",
         "style-loader": "1.1.2",
-        "ts-loader": "7.0.4",
-        "typescript": "3.9.2",
         "url-loader": "4.1.0",
         "vue": "3.0.0-beta.14",
         "vue-loader": "16.0.0-beta.2",

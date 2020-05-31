@@ -16,7 +16,7 @@
     </header>
 </template>
 
-<script lang="ts">
+<script>
     import AIcon from '@/components/icon'
 
     export default {

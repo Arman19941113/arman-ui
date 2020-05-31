@@ -7,43 +7,72 @@ const pkg = require('./package.json')
 
 const external = Object.keys({ ...pkg.dependencies, ...pkg.peerDependencies })
 
-async function srcTask () {
+async function iifeTaskSrc () {
     const bundle = await rollup({
-        input: 'src/index.ts',
+        input: 'src/iife.js',
         external,
         plugins: rollupPlugins,
     })
 
     await bundle.write({
-        file: 'dist/arman-ui.js',
-        sourcemap: false,
-        format: 'es',
+        file: 'dist/arman-ui.iife.js',
+        format: 'iife',
         globals: {
-            vue: 'Vue'
-        }
+            vue: 'Vue',
+        },
     })
 }
 
-async function minTask () {
+async function iifeTaskMin () {
     const bundle = await rollup({
-        input: 'src/index.ts',
+        input: 'src/iife.js',
         external,
         plugins: rollupPlugins.concat(
             terser(),  // minify generated es bundle.
-            rollupGzip({
-                gzipOptions: {
-                    level: 9, // 最慢速度和最高压缩率
-                },
-            }),
+            rollupGzip(),
         ),
     })
 
     await bundle.write({
-        file: 'dist/arman-ui.min.js',
-        sourcemap: true,
+        file: 'dist/arman-ui.iife.pro.js',
+        format: 'iife',
+        globals: {
+            vue: 'Vue',
+        },
     })
 }
 
-exports.srcTask = srcTask
-exports.minTask = minTask
-exports.default = parallel(srcTask, minTask)
+async function esmTaskSrc () {
+    const bundle = await rollup({
+        input: 'src/esm.js',
+        external,
+        plugins: rollupPlugins,
+    })
+
+    await bundle.write({
+        file: 'dist/arman-ui.esm.js',
+        format: 'esm',
+    })
+}
+
+async function esmTaskMin () {
+    const bundle = await rollup({
+        input: 'src/esm.js',
+        external,
+        plugins: rollupPlugins.concat(
+            terser(),  // minify generated es bundle.
+            rollupGzip(),
+        ),
+    })
+
+    await bundle.write({
+        file: 'dist/arman-ui.esm.pro.js',
+        format: 'esm',
+    })
+}
+
+exports.iifeTaskSrc = iifeTaskSrc
+exports.iifeTaskMin = iifeTaskMin
+exports.esmTaskSrc = esmTaskSrc
+exports.esmTaskMin = esmTaskMin
+exports.default = parallel(iifeTaskSrc, iifeTaskMin, esmTaskSrc, esmTaskMin)

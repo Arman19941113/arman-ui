@@ -3,7 +3,7 @@
     <router-view />
 </template>
 
-<script lang="ts">
+<script>
     import AppHeader from './views/AppHeader.vue'
 
     export default {

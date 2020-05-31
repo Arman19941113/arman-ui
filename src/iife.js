@@ -1,11 +1,10 @@
-import { App, Plugin } from 'vue'
 import AIcon from './components/icon'
 import AButton from './components/button'
 import ALoading from './components/loading'
 
 const components = { AIcon, AButton, ALoading }
 
-const plugin: Plugin = {
+const plugin = {
     install (app, ...options) {
         for (const [key, value] of Object.entries(components)) {
             app.component(key, value)
@@ -13,7 +12,6 @@ const plugin: Plugin = {
     },
 }
 
-declare var app: App
-if (app) {
-    app.use(plugin)
+if (appInstance) {
+    appInstance.use(plugin)
 }

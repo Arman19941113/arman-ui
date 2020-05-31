@@ -1,7 +1,6 @@
 const path = require('path')
 const rollupAlias = require('@rollup/plugin-alias')
 const rollupResolve = require('@rollup/plugin-node-resolve').default
-const rollupTypescript = require('@rollup/plugin-typescript')
 const rollupCommonjs = require('@rollup/plugin-commonjs')
 const rollupVue = require('rollup-plugin-vue')
 const rollupPostcss = require('rollup-plugin-postcss')
@@ -20,7 +19,6 @@ module.exports = [
             isProduction: false,
         },
     }),
-    rollupTypescript(),
     rollupPostcss({
         plugins: [
             require('postcss-import')({
