@@ -11,7 +11,7 @@ module.exports = function (webpackEnv) {
         }
     } else if (webpackEnv === 'production') {
         return {
-            outputPath: join('build'),
+            outputPath: join('web'),
             publicPath: '/',
             useSourceMap: false,
         }

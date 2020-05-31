@@ -9,10 +9,10 @@ const koaStatic = require('koa-static')
 
 const app = new Koa()
 
-app.use(koaStatic(path.join('../build')))
+app.use(koaStatic(path.join('../web')))
 
 app.use((ctx, next) => {
-    const content = fs.readFileSync('../build/index.html', 'utf-8')
+    const content = fs.readFileSync('../web/index.html', 'utf-8')
     ctx.response.type = 'html'
     ctx.response.body = content
 })

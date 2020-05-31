@@ -1,7 +1,10 @@
 <template>
     <header class="app-header">
         <div class="left-header">
-            <div class="logo">arman-ui</div>
+            <div class="logo" @click="handleClickLogo">
+                <AIcon name="lighting" width="24" style="margin-right: 4px;"></AIcon>
+                arman-ui
+            </div>
             <a href="https://github.com/Arman19941113/arman-ui" target="_blank">
                 <AIcon name="github" width="24" class="github-icon" />
             </a>
@@ -11,17 +14,25 @@
                 <router-link class="nav-item" to="/guides">指南</router-link>
                 <router-link class="nav-item" to="/components">组件</router-link>
             </div>
-            <div class="search-container">search</div>
+            <!--<div class="search-container">search</div>-->
         </div>
     </header>
 </template>
 
 <script>
     import AIcon from '@/components/icon'
+    import { router } from '../router'
 
     export default {
         name: 'AppHeader',
         components: { AIcon },
+        methods: {
+            handleClickLogo () {
+                router.push({
+                    name: 'home',
+                })
+            },
+        },
     }
 </script>
 
@@ -47,6 +58,16 @@
             width: 256px;
             padding: 0 24px;
             border-right: 1px solid $borderColorLight;
+            .logo {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                transition: all .3s;
+                &:hover {
+                    color: $primaryColor;
+                    transition: all .3s;
+                }
+            }
             .github-icon {
                 cursor: pointer;
                 transition: color .3s;
@@ -65,6 +86,10 @@
                     position: relative;
                     padding: 0 20px;
                     transition: all .3s;
+                    &:hover {
+                        color: $primaryColor;
+                        transition: all .3s;
+                    }
                     &::after {
                         display: block;
                         position: absolute;

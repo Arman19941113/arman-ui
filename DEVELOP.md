@@ -21,7 +21,7 @@ yarn build
 ## 打包后部署预览
 
 ```
-cd build-server
+cd web-server
 node server.js
 ```
 

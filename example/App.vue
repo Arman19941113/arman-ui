@@ -42,6 +42,7 @@
                 h1 {font-size: 1.3em;padding-bottom: 0.2em;border-bottom: 1px solid $borderColorLight;}
                 h2 {font-size: 1.2em;}
                 h3 {font-size: 1.1em;}
+                a {color: $primaryColor;text-decoration: underline;}
                 code[v-pre] {
                     display: block;
                     line-height: 1.5;
@@ -64,10 +65,6 @@
                     th, td {
                         padding: 8px 16px;
                         border: 1px solid $borderColorNormal;
-                        a {
-                            color: $primaryColor;
-                            text-decoration: underline;
-                        }
                     }
                     th {
                         text-align: left;
