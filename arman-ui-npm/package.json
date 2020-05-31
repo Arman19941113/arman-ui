@@ -1,0 +1,20 @@
+{
+    "name": "arman-ui",
+    "version": "2.0.6",
+    "description": "arman-ui",
+    "keywords": [
+        "vue", "vue3"
+    ],
+    "main": "dist/arman-ui.esm.js",
+    "repository": "https://github.com/Arman19941113/arman-ui",
+    "homepage": "https://github.com/Arman19941113/arman-ui#readme",
+    "bugs": {
+        "url": "https://github.com/Arman19941113/arman-ui/issues",
+        "email": "td19941113@gmail.com"
+    },
+    "author": "Arman19941113",
+    "license": "MIT",
+    "peerDependencies": {
+        "vue": "3.0.0-beta.14"
+    }
+}

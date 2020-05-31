@@ -26,7 +26,11 @@ module.exports = function (webpackEnv) {
         resolve: {
             modules: [join('node_modules')],
             extensions: ['.js', '.json'],
-            alias: { '@': join('src'), 'vue$': 'vue/dist/vue.esm-bundler.js' },
+            alias: {
+                '@': join('src'),
+                'vue$': 'vue/dist/vue.esm-bundler.js',
+                'arman-ui/lib': join('src/components'),
+            },
         },
         devtool: isProduction && envConfig.useSourceMap && 'source-map',
         optimization: {

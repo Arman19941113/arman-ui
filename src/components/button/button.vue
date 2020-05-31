@@ -17,7 +17,7 @@
 
 <script>
     import { ref, computed } from 'vue'
-    import AIcon from '@/components/icon'
+    import AIcon from 'arman-ui/lib/icon'
 
     export default {
         name: 'AButton',

@@ -6,42 +6,62 @@ const rollupVue = require('rollup-plugin-vue')
 const rollupPostcss = require('rollup-plugin-postcss')
 const rollupBabel = require('@rollup/plugin-babel').babel
 const rollupCleanup = require('rollup-plugin-cleanup')
+const { terser } = require('rollup-plugin-terser')
+const rollupGzip = require('rollup-plugin-gzip').default
 
-module.exports = [
-    rollupAlias({
-        entries: [{ find: '@', replacement: path.resolve('src') }],
+const basePostcssPlugins = [
+    require('postcss-import')({
+        resolve: require('postcss-import-webpack-resolver')({
+            alias: { '~@': path.resolve('src') },
+        }),
     }),
-    rollupResolve(),
-    rollupCommonjs(), // convert CommonJS modules to ES6
-    rollupVue({
-        css: false, // false 将 css 单独提取, true inject in js
-        template: {
-            isProduction: false,
-        },
-    }),
-    rollupPostcss({
-        plugins: [
-            require('postcss-import')({
-                resolve: require('postcss-import-webpack-resolver')({
-                    alias: { '~@': path.resolve('src') },
-                }),
-            }),
-            require('postcss-mixins'),
-            require('precss'),
-            require('cssnano'),
-        ],
-        extract: path.resolve('dist/arman-ui.css'),
-    }),
-    rollupBabel({
-        presets: [
-            // First, we're setting "modules": false, otherwise Babel will convert our modules to CommonJS before Rollup gets a chance to do its thing
-            ['@babel/preset-env', { 'modules': false }],
-        ],
-        plugins: ['@babel/plugin-transform-runtime'],
-        babelHelpers: 'runtime', // building libraries
-        exclude: ['node_modules/**'],
-    }),
-    rollupCleanup({
-        comments: 'none',
-    }),
+    require('postcss-mixins'),
+    require('precss'),
 ]
+
+module.exports = function (type, name) {
+    return [
+        rollupAlias({
+            // 按需打包时 arman-ui/lib/icon 按 external 处理，全部打包时找到本地文件复用
+            entries: type === 'lib' ? [{ find: '@', replacement: path.resolve('src') }] : [
+                { find: '@', replacement: path.resolve('src') },
+                { find: 'arman-ui/lib/icon', replacement: path.resolve('src/components/icon') },
+            ],
+        }),
+        rollupResolve(),
+        rollupCommonjs(), // convert CommonJS modules to ES6
+        rollupVue({
+            css: false, // false 将 css 单独提取, true inject in js
+            template: {
+                isProduction: false,
+            },
+        }),
+        type === 'lib' && rollupPostcss({
+            plugins: basePostcssPlugins.concat(require('stylefmt')),
+            extract: path.resolve(`arman-ui-npm/lib/${name}/style.css`),
+        }),
+        type === 'dist_iife_src' && rollupPostcss({
+            plugins: basePostcssPlugins.concat(require('stylefmt')),
+            extract: path.resolve('arman-ui-npm/dist/arman-ui.css'),
+        }),
+        type === 'dist_iife_min' && rollupPostcss({
+            plugins: basePostcssPlugins.concat(require('cssnano')),
+            extract: path.resolve('arman-ui-npm/dist/arman-ui.min.css'),
+        }),
+        type.includes('dist_esm') && rollupPostcss({ inject: false }),
+        rollupBabel({
+            presets: [
+                // First, we're setting "modules": false, otherwise Babel will convert our modules to CommonJS before Rollup gets a chance to do its thing
+                ['@babel/preset-env', { 'modules': false }],
+            ],
+            plugins: ['@babel/plugin-transform-runtime'],
+            babelHelpers: 'runtime', // building libraries
+            exclude: ['node_modules/**'],
+        }),
+        rollupCleanup({
+            comments: 'none',
+        }),
+        type.includes('min') && terser(),  // minify generated es bundle.
+        type.includes('min') && rollupGzip(),
+    ].filter(Boolean)
+}

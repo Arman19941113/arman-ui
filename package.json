@@ -9,6 +9,7 @@
     "scripts": {
         "start": "node scripts/start.js",
         "build": "rm -rf build && node scripts/build.js",
+        "lib": "rm -rf arman-ui-npm/lib && gulp --gulpfile gulpfile.lib.js",
         "dist": "gulp --gulpfile gulpfile.dist.js",
         "dist:src": "gulp --gulpfile gulpfile.dist.js iifeTaskSrc",
         "dist:min": "gulp --gulpfile gulpfile.dist.js iifeTaskMin"
@@ -55,6 +56,7 @@
         "rollup-plugin-terser": "6.1.0",
         "rollup-plugin-vue": "6.0.0-alpha.1",
         "style-loader": "1.1.2",
+        "stylefmt": "^6.0.3",
         "url-loader": "4.1.0",
         "vue": "3.0.0-beta.14",
         "vue-loader": "16.0.0-beta.2",
