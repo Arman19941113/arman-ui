@@ -5,6 +5,27 @@ const pkg = require('./package.json')
 
 const external = Object.keys({ ...pkg.dependencies, ...pkg.peerDependencies })
 
+const componentList = ['icon', 'button', 'loading']
+const componentPromises = []
+componentList.forEach(name => {
+    componentPromises.push(rollup({
+        input: `src/components/${name}/index.js`,
+        external: external.concat('arman-ui/lib/icon'),
+        plugins: getRollupPlugins('lib', name),
+    }))
+})
+
+async function libTask () {
+    const bundles = await Promise.all(componentPromises)
+
+    await bundles.forEach((bundle, index) => {
+        bundle.write({
+            file: `arman-ui-npm/lib/${componentList[index]}/index.js`,
+            format: 'esm',
+        })
+    })
+}
+
 async function iifeTaskSrc () {
     const bundle = await rollup({
         input: 'src/iife.js',
@@ -59,6 +80,8 @@ async function esmTaskMin () {
     })
 }
 
+exports.libTask = libTask
 exports.iifeTaskSrc = iifeTaskSrc
 exports.iifeTaskMin = iifeTaskMin
-exports.default = parallel(iifeTaskSrc, iifeTaskMin, esmTaskSrc, esmTaskMin)
+exports.distTask = parallel(iifeTaskSrc, iifeTaskMin, esmTaskSrc, esmTaskMin)
+exports.default = parallel(iifeTaskSrc, iifeTaskMin, esmTaskSrc, esmTaskMin, libTask)
