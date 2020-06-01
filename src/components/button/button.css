@@ -7,6 +7,7 @@
     padding: 0 14px;
     vertical-align: middle;
     cursor: pointer;
+    color: $fontColorNormal;
     transition: color .3s, border-color .3s, background-color .3s;
     .a-button-content {
         display: flex;

@@ -1,0 +1,56 @@
+@import "~@/css/variable.css";
+.a-input {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 32px;
+    color: $fontColorNormal;
+    outline: none;
+    .a-input-box {
+        flex-grow: 1;
+        padding: 0 14px;
+        height: 100%;
+        line-height: 32px;
+        border: 1px solid $borderColor;
+        border-radius: 2px;
+        font-size: 13px;
+        color: $fontColorNormal;
+        transition: color .3s, border-color .3s, box-shadow .3s;
+        &:hover {
+            border-color: $primaryColor;
+            transition: border-color .3s;
+        }
+        &:focus {
+            border-color: $primaryColor;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, .2);
+            transition: border-color .3s, box-shadow .3s;
+        }
+        &::placeholder {
+            color: $placeholderColor;
+        }
+        &[disabled] {
+            color: $disabledColor;
+            border-color: $borderColor;
+            background-color: $disabledBgColor;
+            cursor: not-allowed;
+        }
+        &.round {
+            border-radius: 16px;
+        }
+    }
+    .right-icon {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        color: $fontColorLightMore;
+    }
+
+    &.has-right-icon {
+        .a-input-box {
+            padding: 0 30px 0 14PX;
+        }
+    }
+}

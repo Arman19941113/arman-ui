@@ -6,6 +6,7 @@ $blackColor: #000;
 $fontColor: #303133;
 $fontColorNormal: #606266;
 $fontColorLight: #909399;
+$fontColorLightMore: #C3C6CC;
 
 $borderColor: #DCDFE6;
 $borderColorNormal: #E4E7ED;
@@ -30,3 +31,5 @@ $dangerColorDisabled: #FAB6B6;
 
 $disabledColor: #C0C4CC;
 $disabledBorderColor: #EBEEF5;
+$disabledBgColor: #F8F8F8;
+$placeholderColor: #CDCDCD;

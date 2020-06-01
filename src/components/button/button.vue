@@ -4,9 +4,9 @@
         :disabled="disabled"
         @click="handleClick">
         <div class="a-button-content" :style="{ visibility: loading ? 'hidden' : 'inherit' }">
-            <AIcon v-if="icon" :name="icon" width="16" class="button-icon"></AIcon>
-            <span class="button-text" :style="{ 'margin-left': icon && hasSlots && '5px', 'margin-right': iconRight && hasSlots && '5px' }"><slot></slot></span>
-            <AIcon v-if="iconRight" :name="iconRight" width="16" class="button-icon"></AIcon>
+            <AIcon v-if="leftIcon" :name="leftIcon" width="16" class="button-icon"></AIcon>
+            <span class="button-text" :style="{ 'margin-left': leftIcon && hasSlots && '5px', 'margin-right': rightIcon && hasSlots && '5px' }"><slot></slot></span>
+            <AIcon v-if="rightIcon" :name="rightIcon" width="16" class="button-icon"></AIcon>
         </div>
         <div v-if="loading" class="a-button-loading">
             <AIcon name="loading" width="20" :color="theme === 'default' ? '' : '#FFF'" class="loading-icon"></AIcon>
@@ -35,11 +35,11 @@
                     }
                 },
             },
-            icon: {
+            leftIcon: {
                 type: String,
                 default: '',
             },
-            iconRight: {
+            rightIcon: {
                 type: String,
                 default: '',
             },

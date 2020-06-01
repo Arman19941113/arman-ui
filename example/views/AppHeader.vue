@@ -14,24 +14,32 @@
                 <router-link class="nav-item" to="/guides">指南</router-link>
                 <router-link class="nav-item" to="/components">组件</router-link>
             </div>
-            <!--<div class="search-container">search</div>-->
+            <!-- todo -->
+            <AInput round placeholder="搜索" @input="handleInput" @blur="handleBlur"/>
         </div>
     </header>
 </template>
 
 <script>
     import AIcon from '@/components/icon'
+    import AInput from '@/components/input'
     import { router } from '../router'
 
     export default {
         name: 'AppHeader',
-        components: { AIcon },
+        components: { AIcon, AInput },
         methods: {
             handleClickLogo () {
                 router.push({
                     name: 'home',
                 })
             },
+            handleInput (e) {
+                console.log(e.target.value)
+            },
+            handleBlur (e) {
+                console.log(e.target.value)
+            }
         },
     }
 </script>

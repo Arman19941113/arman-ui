@@ -51,12 +51,12 @@
 </div>
 
 <div class="markdown-button-container">
-    <a-button icon="setting"></a-button>
-    <a-button icon="setting">左边</a-button>
-    <a-button icon-right="setting" theme="primary">右边</a-button>
-    <a-button icon="setting" round theme="success"></a-button>
-    <a-button icon="setting" round theme="warning">左边</a-button>
-    <a-button icon-right="setting" round theme="danger">右边</a-button>
+    <a-button left-icon="setting"></a-button>
+    <a-button left-icon="setting">左边</a-button>
+    <a-button right-icon="setting" theme="primary">右边</a-button>
+    <a-button left-icon="setting" round theme="success"></a-button>
+    <a-button left-icon="setting" round theme="warning">左边</a-button>
+    <a-button right-icon="setting" round theme="danger">右边</a-button>
 </div>
 
 ```html
@@ -94,12 +94,12 @@
     </div>
     
     <div class="markdown-button-container">
-        <a-button icon="setting"></a-button>
-        <a-button icon="setting">左边</a-button>
-        <a-button icon-right="setting" theme="primary">右边</a-button>
-        <a-button icon="setting" round theme="success"></a-button>
-        <a-button icon="setting" round theme="warning">左边</a-button>
-        <a-button icon-right="setting" round theme="danger">右边</a-button>
+        <a-button left-icon="setting"></a-button>
+        <a-button left-icon="setting">左边</a-button>
+        <a-button right-icon="setting" theme="primary">右边</a-button>
+        <a-button left-icon="setting" round theme="success"></a-button>
+        <a-button left-icon="setting" round theme="warning">左边</a-button>
+        <a-button right-icon="setting" round theme="danger">右边</a-button>
     </div>
 </template>
 ```
@@ -109,8 +109,8 @@
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|------|------|
 | theme | 主题 | String  | ['default', 'primary', 'success', 'warning', 'danger'] | 'default' |
-| icon | 按钮左侧图标 | [String] | [icons](icon) | '' |
-| iconRight | 按钮右侧图标 | [String] | [icons](icon) | '' |
+| leftIcon | 按钮左侧图标 | String | [icons](icon) | '' |
+| rightIcon | 按钮右侧图标 | String | [icons](icon) | '' |
 | loading | 加载中 | Boolean | [true, false] | false |
 | loadingText | 加载时显示文字 | String | - | '' |
 | round | 圆角按钮 | Boolean | [true, false] | false |
