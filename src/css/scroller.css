@@ -1,0 +1,10 @@
+@define-mixin scroller $width: 8px, $borderRadius: 4px, $color: #F0F0F0 {
+    &::-webkit-scrollbar {
+        width: $width;
+        height: $width;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: $borderRadius;
+        background-color: $color;
+    }
+}

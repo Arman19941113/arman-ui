@@ -14,7 +14,7 @@
 
 <style>
     @import "~@/css/variable.css";
-
+    @import "~@/css/scroller.css";
     #app {
         position: relative;
         top: 64px;
@@ -25,19 +25,15 @@
         background: $whiteColor;
         .app-main {
             display: flex;
+            min-width: 1000px;
             height: 100%;
+            min-height: 600px;
             .app-content {
                 padding: 20px 40px 40px;
                 width: calc(100% - 256px);
                 height: 100%;
                 overflow: auto;
-                &::-webkit-scrollbar {
-                    width: 8px;
-                }
-                &::-webkit-scrollbar-thumb {
-                    border-radius: 4px;
-                    background-color: $borderColor;
-                }
+                @mixin scroller;
                 /* markdown 渲染样式 */
                 h1 {font-size: 1.3em;padding-bottom: 0.2em;border-bottom: 1px solid $borderColorLight;}
                 h2 {font-size: 1.2em;}
@@ -52,6 +48,9 @@
                     border-radius: 4px;
                     border: 1px solid $borderColorNormal;
                     background-color: $lightGrayColor;
+                }
+                pre .hljs-tag {
+                    white-space: pre-wrap;
                 }
                 table {
                     margin-bottom: 24px;

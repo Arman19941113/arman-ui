@@ -27,19 +27,14 @@
 
 <style scoped>
     @import "~@/css/variable.css";
+    @import "~@/css/scroller.css";
     .side-nav {
         margin: 40px 0;
         border-right: 1px solid $borderColorLight;
         width: 256px;
         height: calc(100% - 80px);
         overflow: auto;
-        &::-webkit-scrollbar {
-            width: 4px;
-        }
-        &::-webkit-scrollbar-thumb {
-            border-radius: 2px;
-            background-color: $borderColorLight;
-        }
+        @mixin scroller 4px, 2px;
         .group-item:not(:first-child) {
             margin-top: 20px;
         }
