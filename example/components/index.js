@@ -14,6 +14,8 @@ const groups = [{
     groupName: '反馈',
     components: [{
         id: 'loading', name: 'Loading 加载',
+    }, {
+        id: 'popper', name: 'Popper 浮层',
     }],
 }]
 

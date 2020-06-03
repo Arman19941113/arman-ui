@@ -13,6 +13,7 @@ const Icon = defineAsyncComponent(() => import(/* webpackChunkName: 'Icon' */'./
 const Button = defineAsyncComponent(() => import(/* webpackChunkName: 'Button' */'./components/button.md'))
 const Input = defineAsyncComponent(() => import(/* webpackChunkName: 'Input' */'./components/input.md'))
 const Loading = defineAsyncComponent(() => import(/* webpackChunkName: 'Loading' */'./components/loading.md'))
+const Popper = defineAsyncComponent(() => import(/* webpackChunkName: 'Popper' */'./components/popper.md'))
 
 export const router = createRouter({
     history: createWebHistory(window.SITE_URL),
@@ -62,6 +63,10 @@ export const router = createRouter({
             path: 'loading',
             name: 'loading',
             component: Loading,
+        }, {
+            path: 'popper',
+            name: 'popper',
+            component: Popper,
         }],
     }, {
         path: '/:catchAll(.*)',
