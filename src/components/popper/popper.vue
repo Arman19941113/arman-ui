@@ -13,6 +13,7 @@
     import { createPopper } from '@popperjs/core'
 
     export default {
+        name: 'APopper',
         props: {
             value: {
                 type: Boolean,

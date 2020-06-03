@@ -16,6 +16,7 @@
     import AIcon from 'arman-ui/lib/icon'
 
     export default {
+        name: 'AInput',
         components: {
             AIcon,
         },
