@@ -73,8 +73,10 @@
             const root = ref(null)
 
             onMounted(() => {
-                // todo ref not work while transition working
-                // console.log(root.value)
+                const { parentNode } = root.value
+                if (getComputedStyle(parentNode).position === 'static') {
+                    parentNode.style.position = 'relative'
+                }
             })
 
             return {

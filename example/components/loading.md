@@ -45,7 +45,7 @@
 # Loading 加载中
 
 ## 基本使用
-<div style="width: 500px;height: 120px;position: relative;display: flex;justify-content: space-around;align-items: center;border: 1px solid #DCDFE6;">
+<div style="width: 500px;height: 120px;display: flex;justify-content: space-around;align-items: center;border: 1px solid #DCDFE6;">
     <a-button @click="handle">整页加载</a-button>
     <a-button @click="handle1">普通圆弧</a-button>
     <a-button @click="handle2">扩散圆圈</a-button>
@@ -58,7 +58,7 @@
 
 ```html
 <template>
-    <div style="width: 500px;height: 120px;position: relative;display: flex;justify-content: space-around;align-items: center;border: 1px solid #DCDFE6;">
+    <div style="width: 500px;height: 120px;display: flex;justify-content: space-around;align-items: center;border: 1px solid #DCDFE6;">
         <a-button @click="handle">整页加载</a-button>
         <a-button @click="handle1">普通圆弧</a-button>
         <a-button @click="handle2">扩散圆圈</a-button>
