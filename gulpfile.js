@@ -10,7 +10,7 @@ const componentPromises = []
 componentList.forEach(name => {
     componentPromises.push(rollup({
         input: `src/components/${name}/index.js`,
-        external: external.concat('arman-ui/lib/icon'),
+        external: external.concat('arman-ui/lib/icon', 'arman-ui/lib/popper'),
         plugins: getRollupPlugins('lib', name),
     }))
 })

@@ -9,6 +9,8 @@ const groups = [{
     groupName: '表单',
     components: [{
         id: 'input', name: 'Input 输入框',
+    }, {
+        id: 'color-picker', name: 'ColorPicker 颜色选择器',
     }],
 }, {
     groupName: '反馈',

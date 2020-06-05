@@ -38,6 +38,7 @@
                 h1 {font-size: 1.3em;padding-bottom: 0.2em;border-bottom: 1px solid $borderColorLight;}
                 h2 {font-size: 1.2em;}
                 h3 {font-size: 1.1em;}
+                h6 {margin: 13px 0;font-weight: 500;}
                 a {color: $primaryColor;text-decoration: underline;}
                 code[v-pre] {
                     display: block;

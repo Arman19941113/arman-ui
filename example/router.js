@@ -12,6 +12,7 @@ const Start = defineAsyncComponent(() => import(/* webpackChunkName: 'Start' */'
 const Icon = defineAsyncComponent(() => import(/* webpackChunkName: 'Icon' */'./components/icon.md'))
 const Button = defineAsyncComponent(() => import(/* webpackChunkName: 'Button' */'./components/button.md'))
 const Input = defineAsyncComponent(() => import(/* webpackChunkName: 'Input' */'./components/input.md'))
+const ColorPicker = defineAsyncComponent(() => import(/* webpackChunkName: 'ColorPicker' */'./components/color-picker.md'))
 const Loading = defineAsyncComponent(() => import(/* webpackChunkName: 'Loading' */'./components/loading.md'))
 const Popper = defineAsyncComponent(() => import(/* webpackChunkName: 'Popper' */'./components/popper.md'))
 
@@ -55,6 +56,10 @@ export const router = createRouter({
             path: 'button',
             name: 'button',
             component: Button,
+        }, {
+            path: 'color-picker',
+            name: 'color-picker',
+            component: ColorPicker,
         }, {
             path: 'input',
             name: 'input',
