@@ -57,8 +57,8 @@ export const router = createRouter({
             name: 'button',
             component: Button,
         }, {
-            path: 'color-picker',
-            name: 'color-picker',
+            path: 'colorPicker',
+            name: 'colorPicker',
             component: ColorPicker,
         }, {
             path: 'input',

@@ -10,7 +10,7 @@ const groups = [{
     components: [{
         id: 'input', name: 'Input 输入框',
     }, {
-        id: 'color-picker', name: 'ColorPicker 颜色选择器',
+        id: 'colorPicker', name: 'ColorPicker 颜色选择器',
     }],
 }, {
     groupName: '反馈',

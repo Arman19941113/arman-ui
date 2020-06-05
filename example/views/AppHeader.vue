@@ -56,7 +56,9 @@
                     router.push({ name: 'home' })
                 },
                 goToSearchItem (name) {
-                    router.push({ name: name.toLowerCase().split(' ')[0] })
+                    const rawName = name.split(' ')[0]
+                    const camelName = rawName[0].toLowerCase() + rawName.slice(1)
+                    router.push({ name: camelName })
                     showPopper.value = false
                 },
             }

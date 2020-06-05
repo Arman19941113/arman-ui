@@ -1,7 +1,7 @@
 <template>
     <div class="side-nav">
         <ul class="groups">
-            <li class="group-item" v-for="group in groups" :key="group.name">
+            <li class="group-item" v-for="group in groups" :key="group.groupName">
                 <div class="group-name">{{group.groupName}}</div>
                 <ul class="components">
                     <li class="component-item" v-for="component in group.components" :key="component.id">
