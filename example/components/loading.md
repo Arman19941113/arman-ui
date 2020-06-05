@@ -46,27 +46,27 @@
 
 ## 基本使用
 <div style="width: 500px;height: 120px;display: flex;justify-content: space-around;align-items: center;border: 1px solid #DCDFE6;">
-    <a-button @click="handle">整页加载</a-button>
-    <a-button @click="handle1">普通圆弧</a-button>
-    <a-button @click="handle2">扩散圆圈</a-button>
-    <a-button @click="handle3">四点旋转</a-button>
-    <a-loading :value="isLoading" global></a-loading>
-    <a-loading :value="isLoading1" type="linear"></a-loading>
-    <a-loading :value="isLoading2" type="wave"></a-loading>
-    <a-loading :value="isLoading3" type="dots"></a-loading>
+    <AButton @click="handle">整页加载</AButton>
+    <AButton @click="handle1">普通圆弧</AButton>
+    <AButton @click="handle2">扩散圆圈</AButton>
+    <AButton @click="handle3">四点旋转</AButton>
+    <ALoading :value="isLoading" global></ALoading>
+    <ALoading :value="isLoading1" type="linear"></ALoading>
+    <ALoading :value="isLoading2" type="wave"></ALoading>
+    <ALoading :value="isLoading3" type="dots"></ALoading>
 </div>
 
 ```html
 <template>
     <div style="width: 500px;height: 120px;display: flex;justify-content: space-around;align-items: center;border: 1px solid #DCDFE6;">
-        <a-button @click="handle">整页加载</a-button>
-        <a-button @click="handle1">普通圆弧</a-button>
-        <a-button @click="handle2">扩散圆圈</a-button>
-        <a-button @click="handle3">四点旋转</a-button>
-        <a-loading :value="isLoading" global></a-loading>
-        <a-loading :value="isLoading1" type="linear"></a-loading>
-        <a-loading :value="isLoading2" type="wave"></a-loading>
-        <a-loading :value="isLoading3" type="dots"></a-loading>
+        <AButton @click="handle">整页加载</AButton>
+        <AButton @click="handle1">普通圆弧</AButton>
+        <AButton @click="handle2">扩散圆圈</AButton>
+        <AButton @click="handle3">四点旋转</AButton>
+        <ALoading :value="isLoading" global></ALoading>
+        <ALoading :value="isLoading1" type="linear"></ALoading>
+        <ALoading :value="isLoading2" type="wave"></ALoading>
+        <ALoading :value="isLoading3" type="dots"></ALoading>
     </div>
 </template>
 ```

@@ -112,9 +112,16 @@ app.mount('#app')
 如果引入了组件没有注册，该组件不会出现在打包文件中
 
 ```javascript
-import { Icon, Button, Loading } from 'arman-ui'
+import {
+    Icon, Button,
+    Loading, Popper,
+    Input, ColorPicker
+} from 'arman-ui'
 
 app.component(Icon.name, Icon)
 app.component(Button.name, Button)
 app.component(Loading.name, Loading)
+app.component(Popper.name, Popper)
+app.component(Input.name, Input)
+app.component(ColorPicker.name, ColorPicker)
 ```

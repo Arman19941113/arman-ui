@@ -6,7 +6,11 @@ const pkg = require('./package.json')
 const external = Object.keys({ ...pkg.dependencies, ...pkg.peerDependencies })
 
 // 需要打包的组件路径
-const componentList = ['icon', 'button', 'loading', 'popper', 'color-picker']
+const componentList = [
+    'icon', 'button',
+    'input', 'color-picker',
+    'loading', 'popper',
+]
 const componentPromises = []
 componentList.forEach(name => {
     componentPromises.push(rollup({
