@@ -84,7 +84,7 @@
         function handleOpen () {
             isRendering = true
             showPopper.value = true
-            const reference = props.reference.$el
+            const reference = props.reference.$el ?? props.reference
             popperInstance = createPopper(reference, popper.value, {
                 placement: 'bottom-start',
                 modifiers: [{
