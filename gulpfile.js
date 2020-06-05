@@ -30,7 +30,7 @@ async function libTask () {
 async function iifeTaskSrc () {
     const bundle = await rollup({
         input: 'src/iife.js',
-        external,
+        external: ['vue'],
         plugins: getRollupPlugins('dist_iife_src'),
     })
 
@@ -44,7 +44,7 @@ async function iifeTaskSrc () {
 async function iifeTaskMin () {
     const bundle = await rollup({
         input: 'src/iife.js',
-        external,
+        external: ['vue'],
         plugins: getRollupPlugins('dist_iife_min'),
     })
 
@@ -58,7 +58,7 @@ async function iifeTaskMin () {
 async function esmTaskSrc () {
     const bundle = await rollup({
         input: 'src/esm.js',
-        external,
+        external: ['vue'],
         plugins: getRollupPlugins('dist_esm_src'),
     })
 
@@ -71,7 +71,7 @@ async function esmTaskSrc () {
 async function esmTaskMin () {
     const bundle = await rollup({
         input: 'src/esm.js',
-        external,
+        external: ['vue'],
         plugins: getRollupPlugins('dist_esm_min'),
     })
 
