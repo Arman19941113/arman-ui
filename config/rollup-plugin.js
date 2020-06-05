@@ -22,7 +22,8 @@ const basePostcssPlugins = [
 module.exports = function (type, name) {
     return [
         rollupAlias({
-            // 按需打包时组件引用了其他组件按 external 处理，全部打包时找到本地文件复用
+            // type === 'lib' 按需打包时组件引用了其他组件按 external 处理
+            // type !== 'lib' 全部打包时找到本地文件复用
             entries: type === 'lib' ? [{ find: '@', replacement: path.resolve('src') }] : [
                 { find: '@', replacement: path.resolve('src') },
                 { find: 'arman-ui/lib/icon', replacement: path.resolve('src/components/icon') },

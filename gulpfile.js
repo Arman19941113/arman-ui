@@ -5,12 +5,13 @@ const pkg = require('./package.json')
 
 const external = Object.keys({ ...pkg.dependencies, ...pkg.peerDependencies })
 
-const componentList = ['icon', 'button', 'loading']
+// 需要打包的组件路径
+const componentList = ['icon', 'button', 'loading', 'popper', 'color-picker']
 const componentPromises = []
 componentList.forEach(name => {
     componentPromises.push(rollup({
         input: `src/components/${name}/index.js`,
-        external: external.concat('arman-ui/lib/icon', 'arman-ui/lib/popper'),
+        external: external.concat('arman-ui/lib/icon', 'arman-ui/lib/popper'), // 组件依赖的内部组件
         plugins: getRollupPlugins('lib', name),
     }))
 })
