@@ -1,5 +1,5 @@
 <template>
-    <svg class="a-icon" :style="{ 'font-size': width + 'px', color }">
+    <svg class="a-icon" :style="{ 'font-size': width && width + 'px', color }">
         <use v-bind="{'xlink:href':`#icon-${name}`}"></use>
     </svg>
 </template>
@@ -16,7 +16,7 @@
             },
             width: {
                 type: [Number, String],
-                default: 16,
+                default: '',
             },
             color: {
                 type: String,

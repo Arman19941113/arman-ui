@@ -47,5 +47,5 @@
 | 参数 | 说明 | 类型 | 默认值 |
 |------|------|------|------|
 | name | 显示的数字 | String  | — |
-| width | 图标大小 | [Number, String] | 16 |
-| color | 图标颜色 | String | '' |
+| width | 图标大小，也可通过 css font-size 属性控制 | [Number, String] | '' |
+| color | 图标颜色，也可通过 css color 属性控制 | String | '' |
