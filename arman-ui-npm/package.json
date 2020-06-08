@@ -1,11 +1,12 @@
 {
     "name": "arman-ui",
-    "version": "2.1.3",
+    "version": "2.1.5",
     "description": "arman-ui",
     "keywords": [
         "vue", "vue3"
     ],
-    "main": "dist/arman-ui.esm.js",
+    "main": "index.js",
+    "types": "types/index.d.ts",
     "repository": "https://github.com/Arman19941113/arman-ui",
     "homepage": "https://github.com/Arman19941113/arman-ui#readme",
     "bugs": {
