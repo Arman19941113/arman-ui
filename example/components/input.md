@@ -56,3 +56,9 @@
 | rightIcon | 右侧图标 | String | [icons](icon) | '' |
 | disabled | 是否禁用 | Boolean | [true, false] | false |
 | round | 开启圆角 | Boolean | [true, false] | false |
+
+### 事件
+
+| 事件名称 | 说明 | 回调参数 |
+|------|------|------|
+| update:modelValue | 当前输入值变化时调用 | modelValue |

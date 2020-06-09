@@ -10,8 +10,8 @@
                 color2: ref('#409EFF'),
                 color3: ref('#409EFF'),
                 recommendColors: ref(['#000', '#333', '#666', '#999', 'FFF']),
-                change (v) {
-                    console.log(v)
+                handleChange (val) {
+                    console.log(val)
                 },
             }
         },
@@ -25,12 +25,12 @@
 ## 基本使用
 
 <AColorPicker v-model="color1" style="margin-right: 24px;" :show-value="false"></AColorPicker>
-<AColorPicker v-model="color1" @change="change"></AColorPicker>
+<AColorPicker v-model="color1" @update:modelValue="handleChange"></AColorPicker>
 
 ```html
 <template>
     <AColorPicker v-model="color1" style="margin-right: 24px;" :show-value="false"></AColorPicker>
-    <AColorPicker v-model="color1" @change="change"></AColorPicker>
+    <AColorPicker v-model="color1" @update:modelValue="handleChange"></AColorPicker>
 </template>
 
 <script>
@@ -42,8 +42,8 @@
         setup () {
             return {
                 color1: ref(''),
-                change (v) {
-                    console.log(v)
+                handleChange (val) {
+                    console.log(val)
                 },
             }
         },
@@ -120,4 +120,4 @@
 
 | 事件名称 | 说明 | 回调参数 |
 |------|------|------|
-| change | 当前选择的RGB颜色值变化时调用 | modelValue |
+| update:modelValue | 当前选择的RGB颜色值变化时调用 | modelValue |
