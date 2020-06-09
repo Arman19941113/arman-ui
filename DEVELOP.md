@@ -30,3 +30,10 @@ node server.js
 ```
 npm run publish
 ```
+
+## 组件库发包
+
+```
+cd arman-ui-npm
+npm publish --access public
+```
