@@ -19,6 +19,13 @@
         font-size: 13px;
         color: $fontColorNormal;
         transition: color .3s, border-color .3s, box-shadow .3s;
+        &[type="number"] {
+            -moz-appearance: textfield;
+            &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+                appearance: none;
+                margin: 0;
+            }
+        }
         &:hover {
             border-color: $primaryColor;
             transition: border-color .3s;

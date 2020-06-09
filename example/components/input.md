@@ -52,6 +52,7 @@
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 |------|------|------|------|------|
 | modelValue | 输入值 | String  | - | '' |
+| type | 输入框类型 | String  | ['text', 'number'] | 'text' |
 | placeholder | 占位文本 | String  | - | '' |
 | rightIcon | 右侧图标 | String | [icons](icon) | '' |
 | disabled | 是否禁用 | Boolean | [true, false] | false |

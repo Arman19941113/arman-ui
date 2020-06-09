@@ -1,6 +1,6 @@
 <template>
     <div :class="['a-input', rightIcon && 'has-right-icon']">
-        <input type="text"
+        <input :type=type
             :class="['a-input-box', round && 'round']"
             :value="modelValue"
             :disabled="disabled"
@@ -21,6 +21,13 @@
             AIcon,
         },
         props: {
+            type: {
+                type: String,
+                default: 'text',
+                validator (val) {
+                    return ['text', 'number'].includes(val)
+                },
+            },
             modelValue: {
                 type: String,
                 default: '',
