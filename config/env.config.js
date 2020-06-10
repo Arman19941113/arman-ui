@@ -11,8 +11,8 @@ module.exports = function (webpackEnv) {
         }
     } else if (webpackEnv === 'production') {
         return {
-            outputPath: join('web'),
-            publicPath: '/',
+            outputPath: join('web/arman-ui/web'),
+            publicPath: '/arman-ui/web/',
             useSourceMap: false,
         }
     }

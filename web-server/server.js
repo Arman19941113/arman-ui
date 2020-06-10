@@ -11,8 +11,8 @@ const app = new Koa()
 
 app.use(koaStatic(path.join('../web')))
 
-app.use((ctx, next) => {
-    const content = fs.readFileSync('../web/index.html', 'utf-8')
+app.use(ctx => {
+    const content = fs.readFileSync('../web/arman-ui/web/index.html', 'utf-8')
     ctx.response.type = 'html'
     ctx.response.body = content
 })

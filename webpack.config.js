@@ -9,7 +9,6 @@ const { VueLoaderPlugin } = require('vue-loader')
 const createResolver = require('postcss-import-webpack-resolver')
 
 module.exports = function (webpackEnv) {
-    const isDevelopment = webpackEnv === 'development'
     const isProduction = webpackEnv === 'production'
     const envConfig = require('./config/env.config')(webpackEnv)
 
@@ -47,7 +46,7 @@ module.exports = function (webpackEnv) {
         },
         plugins: [
             new HtmlWebpackPlugin({
-                template: isDevelopment ? join('public/index-dev.html') : join('public/index.html'),
+                template: join('public/index.html'),
                 favicon: join('public/favicon.png'),
                 filename: 'index.html',
             }),

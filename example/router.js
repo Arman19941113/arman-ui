@@ -17,7 +17,7 @@ const Loading = defineAsyncComponent(() => import(/* webpackChunkName: 'Loading'
 const Popper = defineAsyncComponent(() => import(/* webpackChunkName: 'Popper' */'./components/popper.md'))
 
 export const router = createRouter({
-    history: createWebHistory(window.SITE_URL),
+    history: createWebHistory('/arman-ui/'),
     routes: [{
         path: '',
         redirect: { name: 'home' },
