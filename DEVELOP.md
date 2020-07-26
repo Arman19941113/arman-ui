@@ -28,7 +28,7 @@ node server.js
 ## 打包组件库
 
 ```
-npm run publish
+yarn run publish
 ```
 
 ## 组件库发包
