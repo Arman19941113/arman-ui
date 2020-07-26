@@ -10,7 +10,7 @@
             const isLoading1 = ref(false);
             const isLoading2 = ref(false);
             const isLoading3 = ref(false);
-            
+
             return {
                 isLoading,
                 isLoading1,
@@ -21,25 +21,25 @@
                 handle2,
                 handle3,
             }
+
+            function handle () {
+                 isLoading.value = !isLoading.value;
+                 setTimeout(()=>{isLoading.value = false}, 2000)
+            }
+            function handle1 () {
+                 isLoading1.value = !isLoading1.value;
+                 setTimeout(()=>{isLoading1.value = false}, 2000)
+            }
+            function handle2 () {
+                 isLoading2.value = !isLoading2.value;
+                 setTimeout(()=>{isLoading2.value = false}, 2000)
+            }
+            function handle3 () {
+                 isLoading3.value = !isLoading3.value;
+                 setTimeout(()=>{isLoading3.value = false}, 2000)
+            }
         },
     };
-    
-    function handle () {
-         this.isLoading = !this.isLoading;
-         setTimeout(()=>{this.isLoading = false}, 2000)
-    }
-    function handle1 () {
-         this.isLoading1 = !this.isLoading1;
-         setTimeout(()=>{this.isLoading1 = false}, 2000)
-    }
-    function handle2 () {
-         this.isLoading2 = !this.isLoading2;
-         setTimeout(()=>{this.isLoading2 = false}, 2000)
-    }
-    function handle3 () {
-         this.isLoading3 = !this.isLoading3;
-         setTimeout(()=>{this.isLoading3 = false}, 2000)
-    }
 </script>
 
 # Loading 加载中
