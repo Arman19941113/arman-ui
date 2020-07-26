@@ -1,13 +1,13 @@
 <template>
     <div class="a-color-picker-input">
         <div class="a-color-picker-input-hex">
-            <InputContainer :info="info.hex" @change="handleChange"></InputContainer>
+            <InputContainer :color-info="colorState.hex" @inputChange="handleChange"></InputContainer>
         </div>
         <div class="a-color-picker-input-rgba">
-            <InputContainer :info="info.r" @change="handleChange"></InputContainer>
-            <InputContainer :info="info.g" @change="handleChange"></InputContainer>
-            <InputContainer :info="info.b" @change="handleChange"></InputContainer>
-            <InputContainer :info="info.a" @change="handleChange"></InputContainer>
+            <InputContainer :color-info="colorState.r" @inputChange="handleChange"></InputContainer>
+            <InputContainer :color-info="colorState.g" @inputChange="handleChange"></InputContainer>
+            <InputContainer :color-info="colorState.b" @inputChange="handleChange"></InputContainer>
+            <InputContainer :color-info="colorState.a" @inputChange="handleChange" @tab="$emit('tab')"></InputContainer>
         </div>
     </div>
 </template>
@@ -28,7 +28,7 @@
             },
         },
         setup (props, context) {
-            const info = reactive({
+            const colorState = reactive({
                 hex: { key: 'hex', name: 'HEX', value: props.colorObj.hex, error: false },
                 r: { key: 'r', name: 'R', value: props.colorObj.rgba.r, error: false },
                 g: { key: 'g', name: 'G', value: props.colorObj.rgba.g, error: false },
@@ -37,79 +37,69 @@
             })
 
             watch(() => props.colorObj, val => {
-                info.hex.value = val.rgba.a === 1 ? val.hex : ''
-                info.r.value = val.rgba.r
-                info.g.value = val.rgba.g
-                info.b.value = val.rgba.b
-                info.a.value = val.rgba.a
+                colorState.hex.value = val.rgba.a === 1 ? val.hex : ''
+                colorState.r.value = val.rgba.r
+                colorState.g.value = val.rgba.g
+                colorState.b.value = val.rgba.b
+                colorState.a.value = val.rgba.a
+                validate(colorState)
             })
 
             return {
-                info,
+                colorState,
                 handleChange,
             }
 
-            /**
-             * 处理手动输入颜色
-             * @param {String} key
-             * @param {String} value
-             */
-            function handleChange (key, value) {
-                info[key].value = value
+            // 处理手动输入颜色
+            function handleChange ({ key, value }) {
+                colorState[key].value = value
 
-                if (!validate(key, info)) {
+                if (!validate(colorState)) {
                     return
                 }
 
                 const colorStr = key === 'hex'
-                    ? info.hex.value
-                    : `rgba(${info.r.value}, ${info.g.value}, ${info.b.value}, ${info.a.value})`
-                context.emit('change', colorStr)
+                    ? colorState.hex.value
+                    : `rgba(${colorState.r.value}, ${colorState.g.value}, ${colorState.b.value}, ${colorState.a.value})`
+                context.emit('colorChange', colorStr)
             }
-        },
-    }
 
-    /**
-     * 根据输入的表单判断输入值是否合法
-     * @param {String} inputKey
-     * @param {Object} info
-     * @return {Boolean}
-     */
-    function validate (inputKey, info) {
-        let result = true
-        const { hex, r, g, b, a } = info
-
-        if (inputKey === 'hex') {
-            const hexCore = hex.value.slice(1)
-            const { length } = hexCore
-            if (hex.value.startsWith('#') && (length === 3 || length === 6) && !hexCore.match(/[^0-9a-fA-F]/)) {
-                hex.error = false
-            } else {
-                hex.error = true
-                result = false
-            }
-        } else if (inputKey === 'a') {
-            if (a.value >= 0 && a.value <= 1) {
-                a.error = false
-            } else {
-                a.error = true
-                result = false
-            }
-        } else {
-            const list = [r, g, b]
-            list.forEach(item => {
-                const { key, value } = item
-                if (key === inputKey) {
-                    if (value >= 0 && value <= 255) {
-                        item.error = false
+            // 根据输入的表单判断输入值是否合法
+            function validate (colorState) {
+                let result = true
+                const { hex, r, g, b, a } = colorState
+                // hex
+                if (hex.value === '') {
+                    hex.error = false
+                } else {
+                    const hexCore = hex.value.slice(1)
+                    const { length } = hexCore
+                    if (hex.value.startsWith('#') && (length === 3 || length === 6) && !hexCore.match(/[^0-9a-fA-F]/)) {
+                        hex.error = false
                     } else {
-                        item.error = true
+                        hex.error = true
                         result = false
                     }
                 }
-            })
-        }
-
-        return result
+                // a
+                if (a.value >= 0 && a.value <= 1) {
+                    a.error = false
+                } else {
+                    a.error = true
+                    result = false
+                }
+                // r g b
+                for (const colorInfo of [r, g, b]) {
+                    const { value } = colorInfo
+                    if (value >= 0 && value <= 255) {
+                        colorInfo.error = false
+                    } else {
+                        colorInfo.error = true
+                        result = false
+                    }
+                }
+                return result
+            }
+        },
     }
 </script>

@@ -1,10 +1,11 @@
 <template>
     <div class="a-color-picker-input-part">
-        <input :type="info.name === 'HEX' ? 'text' : 'number'"
-            :class="['a-color-picker-input-value', info.error && 'error']"
-            :value="info.value"
+        <input :type="colorInfo.name === 'HEX' ? 'text' : 'number'"
+            :class="['a-color-picker-input-value', colorInfo.error && 'error']"
+            :value="colorInfo.value"
+            @keydown.native.tab="handleTab"
             @change="handleChange">
-        <span class="a-color-picker-input-text">{{info.name}}</span>
+        <span class="a-color-picker-input-text">{{colorInfo.name}}</span>
     </div>
 </template>
 
@@ -12,20 +13,28 @@
     export default {
         name: 'InputContainer',
         props: {
-            info: {
+            colorInfo: {
                 type: Object,
                 required: true,
             },
         },
         setup (props, context) {
             return {
-                handleChange (e) {
-                    const { key } = props.info
-                    const value = e.target.value
-
-                    context.emit('change', key, value)
-                },
+                handleTab, handleChange,
             }
-        }
+
+            function handleTab () {
+                if (props.colorInfo.key === 'a') {
+                    context.emit('tab')
+                }
+            }
+
+            function handleChange (e) {
+                const { key } = props.colorInfo
+                const value = e.target.value
+
+                context.emit('inputChange', { key, value })
+            }
+        },
     }
 </script>

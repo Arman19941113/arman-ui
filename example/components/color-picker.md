@@ -85,10 +85,12 @@
 
 ###### 当 recommend 属性为 true 时显示推荐的颜色预设，为 false 时关闭预设，也可传入数组自定义预设。
 
+<AColorPicker v-model="color3" :recommend="false" style="margin-right: 24px;"></AColorPicker>
 <AColorPicker v-model="color3" :recommend="recommendColors"></AColorPicker>
 
 ```html
 <template>
+    <AColorPicker v-model="color3" :recommend="false"></AColorPicker>
     <AColorPicker v-model="color3" :recommend="recommendColors"></AColorPicker>
 </template>
 

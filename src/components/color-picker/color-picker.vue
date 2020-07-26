@@ -1,6 +1,8 @@
 <template>
     <div ref="reference"
+        tabindex="0"
         :class="['a-color-picker',`a-color-picker-${size}` , showPopper && 'active', showValue && 'a-color-picker-show-value']"
+        @keydown="handleKeydown"
         @click="handleClickPicker">
         <div class="a-color-picker-color">
             <!-- 如果传入的色值为空字符串或者没有传值默认白色背景 + 中间一个叉 -->
@@ -17,19 +19,26 @@
             <div class="a-color-picker-dropdown" @click.stop>
                 <!-- 饱和度面板 -->
                 <div class="a-color-picker-saturation-container">
-                    <SaturationPanel :color-obj="colorObj" @change="handleColorChange"></SaturationPanel>
+                    <SaturationPanel :color-obj="colorObj" @colorChange="handleColorChange"></SaturationPanel>
                 </div>
                 <!-- 色彩条 -->
                 <div class="a-color-picker-hue-container">
-                    <HueSlider :color-obj="colorObj" @change="handleColorChange"></HueSlider>
+                    <HueSlider :color-obj="colorObj" @colorChange="handleColorChange"></HueSlider>
                 </div>
                 <!-- 色彩值 -->
                 <div class="a-color-picker-input-container">
-                    <ColorInput :color-obj="colorObj" @change="handleColorChange"></ColorInput>
+                    <ColorInput :color-obj="colorObj"
+                        @tab="handleTabInput"
+                        @colorChange="handleColorChange"
+                    ></ColorInput>
                 </div>
                 <!-- 预设值 -->
                 <div class="a-color-picker-recommend-container" v-if="isRenderRecommend">
-                    <RecommendColors :color-obj="colorObj" :recommend="recommend" @change="handleColorChange"></RecommendColors>
+                    <RecommendColors :color-obj="colorObj"
+                        :recommend="recommend"
+                        @tab="handleTabRecommend"
+                        @colorChange="handleColorChange"
+                    ></RecommendColors>
                 </div>
             </div>
         </APopper>
@@ -37,7 +46,7 @@
 </template>
 
 <script>
-    import { ref, computed, watch } from 'vue'
+    import { ref, computed, watch, nextTick } from 'vue'
     import AIcon from 'arman-ui/lib/icon'
     import APopper from 'arman-ui/lib/popper'
     import SaturationPanel from './components/saturation-panel.vue'
@@ -84,11 +93,11 @@
         },
         setup (props, context) {
             const reference = ref(null)
+            const showPopper = ref(false)
             const isRenderRecommend = computed(() => {
                 return Boolean(props.recommend === true || (Array.isArray(props.recommend) && props.recommend.length))
             })
             const { colorStr, colorObj, handleColorChange, changeColorFromProps } = useColorInfo(props, context)
-            const { showPopper, handleClickPicker } = useShowPopper(changeColorFromProps, reference)
 
             // 1. 组件初始化时，如果计算的色值和传入的值不一样，显示计算的色值
             changeColorFromProps({ isCreated: true })
@@ -98,15 +107,68 @@
                 changeColorFromProps()
             })
 
+            watch(showPopper, val => {
+                if (val === false) {
+                    // 3. 关闭组件时如果绑定值与组件内部选择的值不一致（比如既没有使用 v-model 也没有监听 change 事件）显示绑定值
+                    changeColorFromProps()
+                }
+            })
+
             return {
                 reference,
                 isRenderRecommend, // 是否渲染预设值
-                showPopper, handleClickPicker,
+                showPopper,
                 colorStr, // 当前颜色的色值，如果为空字符串显示：默认白色背景 + 中间一个叉
                 colorObj, // 储存当前颜色的相关信息
+                handleClickPicker,
                 handleColorChange,
+                handleKeydown, handleTabInput, handleTabRecommend,
             }
 
+            function closePopper () {
+                showPopper.value = false
+                reference.value.focus()
+            }
+
+            function openPopper () {
+                showPopper.value = true
+                // 展开后默认聚焦于饱和度面板
+                nextTick(() => {
+                    reference.value.querySelector('.a-color-picker-saturation').focus()
+                })
+            }
+
+            function handleKeydown (e) {
+                if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+                    showPopper.value ? closePopper() : openPopper()
+                } else if (e.code === 'Escape') {
+                    closePopper()
+                }
+            }
+
+            function handleTabInput () {
+                // 如果未开启预设则此 tab 事件为颜色选择器最后一个表单 tab 事件，重新聚焦于饱和度面板
+                if (!isRenderRecommend.value) {
+                    // 下面的代码先于 tab 行为执行，所以结果实际上会在饱和度面板聚焦
+                    reference.value.focus()
+                }
+            }
+
+            function handleTabRecommend () {
+                // 颜色选择器最后一个表单 tab 事件，重新聚焦于饱和度面板
+                reference.value.focus()
+            }
+
+            function handleClickPicker () {
+                showPopper.value ? closePopper() : openPopper()
+                setTimeout(() => {
+                    document.addEventListener('click', e => {
+                        if (!reference.value.contains(e.target)) {
+                            closePopper()
+                        }
+                    }, { once: true })
+                })
+            }
         },
     }
 
@@ -187,32 +249,6 @@
         }
 
         return { colorStr, colorObj, handleColorChange, changeColorFromProps }
-    }
-
-    function useShowPopper (changeColorFromProps, reference) {
-        const showPopper = ref(false)
-
-        watch(showPopper, val => {
-            if (val === false) {
-                // 3. 关闭组件时如果绑定值与组件内部选择的值不一致（比如既没有使用 v-model 也没有监听 change 事件）显示绑定值
-                changeColorFromProps()
-            }
-        })
-
-        const handleClickOutside = e => {
-            if (!reference.value.contains(e.target)) {
-                showPopper.value = false
-            }
-        }
-
-        const handleClickPicker = () => {
-            showPopper.value = !showPopper.value
-            setTimeout(() => {
-                document.addEventListener('click', handleClickOutside, { once: true })
-            })
-        }
-
-        return { showPopper, handleClickPicker }
     }
 </script>
 
