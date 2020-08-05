@@ -12,7 +12,7 @@ module.exports = function (webpackEnv) {
     return {
         mode: webpackEnv,
         entry: {
-            main: path.resolve('example/main.js'),
+            main: path.resolve('src/main.js'),
         },
         output: {
             path: isProduction ? envConfig.outputPath : path.resolve('server'),
@@ -21,19 +21,22 @@ module.exports = function (webpackEnv) {
         },
         resolve: {
             modules: [path.resolve('node_modules')],
-            extensions: ['.js', '.json'],
-            alias: {
-                '@': path.resolve('src'),
-                'vue$': 'vue/dist/vue.esm-bundler.js',
-                'arman-ui/lib': path.resolve('src/components'),
-            },
+            extensions: ['.js', '.json', '.vue'],
+            alias: { '@': path.resolve('src'), 'vue$': 'vue/dist/vue.esm-bundler.js' },
         },
         devtool: isProduction && envConfig.useSourceMap && 'source-map',
         optimization: {
             splitChunks: {
                 minSize: 30000,
                 cacheGroups: {
-                    vendor: {
+                    armanUI: {
+                        test: /[\\/]node_modules[\\/]arman-ui/,
+                        name: 'arman-ui',
+                        chunks: 'all',
+                        priority: 1,
+                        reuseExistingChunk: true,
+                    },
+                    vendors: {
                         test: /[\\/]node_modules[\\/]/,
                         name: 'vendors',
                         chunks: 'all',
@@ -58,17 +61,6 @@ module.exports = function (webpackEnv) {
         ].filter(Boolean),
         module: {
             rules: [{
-                test: /\.md$/,
-                use: [{
-                    loader: 'vue-loader',
-                }, {
-                    loader: 'vue-markdown-loader/lib/markdown-compiler',
-                    options: {
-                        raw: true,
-                        preventExtract: true,
-                    },
-                }],
-            }, {
                 test: /\.vue$/,
                 loader: 'vue-loader',
             }, {
@@ -79,31 +71,33 @@ module.exports = function (webpackEnv) {
                     options: {
                         cacheDirectory: true,
                         presets: ['@babel/preset-env'],
-                        plugins: ['@babel/plugin-transform-runtime'],
+                        plugins: [
+                            '@babel/plugin-transform-runtime',
+                            ['component', { 'libraryName': 'arman-ui' }],
+                        ],
                     },
                 },
             }, {
                 test: /\.css$/,
-                use: [isProduction ? MiniCssExtractPlugin.loader : 'style-loader', {
-                    loader: 'css-loader',
-                    options: {
-                        importLoaders: 1,
-                    },
-                }, {
-                    loader: 'postcss-loader',
-                    options: {
-                        plugins: [
-                            require('postcss-import')({
-                                resolve: createResolver({
-                                    alias: { '~@': path.resolve('src') },
+                use: [
+                    isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                    { loader: 'css-loader', options: { importLoaders: 1 } },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                require('postcss-import')({
+                                    resolve: createResolver({
+                                        alias: { '~@': path.resolve('src') },
+                                    }),
                                 }),
-                            }),
-                            require('postcss-mixins'),
-                            require('precss'),
-                            require('cssnano'),
-                        ],
+                                require('postcss-mixins'),
+                                require('precss'),
+                                require('cssnano'),
+                            ],
+                        },
                     },
-                }],
+                ],
             }, {
                 test: /\.(bmp|gif|jpe?g|png|svg)$/,
                 use: {
@@ -111,7 +105,7 @@ module.exports = function (webpackEnv) {
                     options: {
                         limit: 30000,
                         esModule: false,
-                        name: 'static/images/[name].[hash:8].[ext]',
+                        name: 'static/images/[name].[hash].[ext]',
                     },
                 },
             }, {
@@ -121,7 +115,7 @@ module.exports = function (webpackEnv) {
                     options: {
                         limit: 30000,
                         esModule: false,
-                        name: 'static/media/[name].[hash:8].[ext]',
+                        name: 'static/media/[name].[hash].[ext]',
                     },
                 },
             }, {
@@ -131,7 +125,7 @@ module.exports = function (webpackEnv) {
                     options: {
                         limit: 30000,
                         esModule: false,
-                        name: 'static/fonts/[name].[hash:8].[ext]',
+                        name: 'static/fonts/[name].[hash].[ext]',
                     },
                 },
             }].filter(Boolean),

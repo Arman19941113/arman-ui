@@ -3,7 +3,7 @@
         tabindex="0"
         :class="['a-color-picker',`a-color-picker-${size}` , showPopper && 'active', showValue && 'a-color-picker-show-value']"
         @keydown="handleKeydown"
-        @click="handleClickPicker">
+        @click="togglePopper">
         <div class="a-color-picker-color">
             <!-- 如果传入的色值为空字符串或者没有传值默认白色背景 + 中间一个叉 -->
             <AIcon v-if="colorStr === ''" name="close-bold" class="a-color-picker-color-square" />
@@ -16,7 +16,7 @@
             <AIcon name="odd-arrow" class="icon-odd-arrow" />
         </div>
         <APopper :value="showPopper" :reference="reference">
-            <div class="a-color-picker-dropdown" @click.stop>
+            <div class="a-color-picker-dropdown">
                 <!-- 饱和度面板 -->
                 <div class="a-color-picker-saturation-container">
                     <SaturationPanel :color-obj="colorObj" @colorChange="handleColorChange"></SaturationPanel>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-    import { ref, computed, watch, nextTick } from 'vue'
+    import { ref, computed, watch, nextTick, onMounted, onUnmounted } from 'vue'
     import AIcon from 'arman-ui/lib/icon'
     import APopper from 'arman-ui/lib/popper'
     import SaturationPanel from './components/saturation-panel.vue'
@@ -107,11 +107,13 @@
                 changeColorFromProps()
             })
 
-            watch(showPopper, val => {
-                if (val === false) {
-                    // 3. 关闭组件时如果绑定值与组件内部选择的值不一致（比如既没有使用 v-model 也没有监听 change 事件）显示绑定值
-                    changeColorFromProps()
-                }
+            onMounted(() => {
+                document.addEventListener('click', handleClickOutside)
+            })
+
+            onUnmounted(() => {
+                console.log('unmounted!')
+                document.removeEventListener('click', handleClickOutside)
             })
 
             return {
@@ -120,7 +122,7 @@
                 showPopper,
                 colorStr, // 当前颜色的色值，如果为空字符串显示：默认白色背景 + 中间一个叉
                 colorObj, // 储存当前颜色的相关信息
-                handleClickPicker,
+                togglePopper,
                 handleColorChange,
                 handleKeydown, handleTabInput, handleTabRecommend,
             }
@@ -128,6 +130,8 @@
             function closePopper () {
                 showPopper.value = false
                 reference.value.focus()
+                // 3. 关闭组件时如果绑定值与组件内部选择的值不一致（比如既没有使用 v-model 也没有监听 change 事件）显示绑定值
+                changeColorFromProps()
             }
 
             function openPopper () {
@@ -138,11 +142,21 @@
                 })
             }
 
+            function togglePopper () {
+                showPopper.value ? closePopper() : openPopper()
+            }
+
+            function handleClickOutside (e) {
+                if (!reference.value.contains(e.target)) {
+                    showPopper.value && closePopper()
+                }
+            }
+
             function handleKeydown (e) {
                 if (e.code === 'Enter' || e.code === 'NumpadEnter') {
-                    showPopper.value ? closePopper() : openPopper()
+                    togglePopper()
                 } else if (e.code === 'Escape') {
-                    closePopper()
+                    showPopper.value && closePopper()
                 }
             }
 
@@ -157,17 +171,6 @@
             function handleTabRecommend () {
                 // 颜色选择器最后一个表单 tab 事件，重新聚焦于饱和度面板
                 reference.value.focus()
-            }
-
-            function handleClickPicker () {
-                showPopper.value ? closePopper() : openPopper()
-                setTimeout(() => {
-                    document.addEventListener('click', e => {
-                        if (!reference.value.contains(e.target)) {
-                            closePopper()
-                        }
-                    }, { once: true })
-                })
             }
         },
     }

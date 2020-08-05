@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <div v-show="value" ref="root" class="a-loading" :style="{ position: global && 'fixed', 'z-index': index, background }" @click.stop>
+        <div v-show="value" ref="root" class="a-loading" :style="{ position: global && 'fixed', zIndex, background }" @click.stop>
             <!-- 变化圆弧 -->
             <svg v-if="type === 'default'" :style="computedSize" class="flex-loading" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="32" cy="32" r="29" fill="none" stroke="#409EFF" stroke-width="6" stroke-linecap="round" />
@@ -27,7 +27,8 @@
 </template>
 
 <script>
-    import { ref, computed, onMounted } from 'vue'
+    import { ref, computed, onMounted, watch } from 'vue'
+    import stackManager from '@/util/stackManager'
 
     export default {
         name: 'ALoading',
@@ -56,10 +57,6 @@
                 type: Boolean,
                 default: false,
             },
-            index: {
-                type: String,
-                default: '2000',
-            },
             background: {
                 type: String,
                 default: 'rgba(255, 255, 255, .8)',
@@ -69,8 +66,13 @@
                 default: '',
             },
         },
-        setup (props, context) {
+        setup (props) {
             const root = ref(null)
+            const zIndex = ref(0)
+
+            watch(() => props.value, val => {
+                if (val) zIndex.value = stackManager.nextStack()
+            }, { immediate: true })
 
             onMounted(() => {
                 const { parentNode } = root.value
@@ -81,6 +83,7 @@
 
             return {
                 root,
+                zIndex,
                 computedSize: computed(() => ({
                     width: props.width + 'px',
                     height: props.width + 'px',

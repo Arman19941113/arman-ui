@@ -33,7 +33,7 @@ async function libTask () {
 
 async function iifeTaskSrc () {
     const bundle = await rollup({
-        input: 'src/iife.js',
+        input: 'src/index.js',
         external: ['vue'],
         plugins: getRollupPlugins('dist_iife_src'),
     })
@@ -41,13 +41,14 @@ async function iifeTaskSrc () {
     await bundle.write({
         file: 'arman-ui-npm/dist/arman-ui.iife.js',
         format: 'iife',
+        name: 'ArmanUI',
         globals: { vue: 'Vue' },
     })
 }
 
 async function iifeTaskMin () {
     const bundle = await rollup({
-        input: 'src/iife.js',
+        input: 'src/index.js',
         external: ['vue'],
         plugins: getRollupPlugins('dist_iife_min'),
     })
@@ -55,13 +56,14 @@ async function iifeTaskMin () {
     await bundle.write({
         file: 'arman-ui-npm/dist/arman-ui.iife.min.js',
         format: 'iife',
+        name: 'ArmanUI',
         globals: { vue: 'Vue' },
     })
 }
 
 async function esmTaskSrc () {
     const bundle = await rollup({
-        input: 'src/esm.js',
+        input: 'src/index.js',
         external: ['vue'],
         plugins: getRollupPlugins('dist_esm_src'),
     })
@@ -74,7 +76,7 @@ async function esmTaskSrc () {
 
 async function esmTaskMin () {
     const bundle = await rollup({
-        input: 'src/esm.js',
+        input: 'src/index.js',
         external: ['vue'],
         plugins: getRollupPlugins('dist_esm_min'),
     })
@@ -86,7 +88,5 @@ async function esmTaskMin () {
 }
 
 exports.libTask = libTask
-exports.iifeTaskSrc = iifeTaskSrc
-exports.iifeTaskMin = iifeTaskMin
 exports.distTask = parallel(iifeTaskSrc, iifeTaskMin, esmTaskSrc, esmTaskMin)
 exports.default = parallel(iifeTaskSrc, iifeTaskMin, esmTaskSrc, esmTaskMin, libTask)

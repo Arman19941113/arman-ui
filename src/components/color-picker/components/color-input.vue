@@ -1,13 +1,13 @@
 <template>
     <div class="a-color-picker-input">
         <div class="a-color-picker-input-hex">
-            <InputContainer :color-info="colorState.hex" @inputChange="handleChange"></InputContainer>
+            <InputContainer :color-info="colorState.hex" @inputChange="handleInput"></InputContainer>
         </div>
         <div class="a-color-picker-input-rgba">
-            <InputContainer :color-info="colorState.r" @inputChange="handleChange"></InputContainer>
-            <InputContainer :color-info="colorState.g" @inputChange="handleChange"></InputContainer>
-            <InputContainer :color-info="colorState.b" @inputChange="handleChange"></InputContainer>
-            <InputContainer :color-info="colorState.a" @inputChange="handleChange" @tab="$emit('tab')"></InputContainer>
+            <InputContainer :color-info="colorState.r" @inputChange="handleInput"></InputContainer>
+            <InputContainer :color-info="colorState.g" @inputChange="handleInput"></InputContainer>
+            <InputContainer :color-info="colorState.b" @inputChange="handleInput"></InputContainer>
+            <InputContainer :color-info="colorState.a" @inputChange="handleInput" @tab="$emit('tab')"></InputContainer>
         </div>
     </div>
 </template>
@@ -15,6 +15,7 @@
 <script>
     import { reactive, watch } from 'vue'
     import InputContainer from './input-container.vue'
+    import tinycolor from 'tinycolor2'
 
     export default {
         name: 'ColorInput',
@@ -30,38 +31,39 @@
         setup (props, context) {
             const colorState = reactive({
                 hex: { key: 'hex', name: 'HEX', value: props.colorObj.hex, error: false },
-                r: { key: 'r', name: 'R', value: props.colorObj.rgba.r, error: false },
-                g: { key: 'g', name: 'G', value: props.colorObj.rgba.g, error: false },
-                b: { key: 'b', name: 'B', value: props.colorObj.rgba.b, error: false },
-                a: { key: 'a', name: 'Alpha', value: props.colorObj.rgba.a, error: false },
+                r: { key: 'r', name: 'R', value: props.colorObj.rgba.r.toString(), error: false },
+                g: { key: 'g', name: 'G', value: props.colorObj.rgba.g.toString(), error: false },
+                b: { key: 'b', name: 'B', value: props.colorObj.rgba.b.toString(), error: false },
+                a: { key: 'a', name: 'Alpha', value: props.colorObj.rgba.a.toString(), error: false },
             })
 
             watch(() => props.colorObj, val => {
-                colorState.hex.value = val.rgba.a === 1 ? val.hex : ''
-                colorState.r.value = val.rgba.r
-                colorState.g.value = val.rgba.g
-                colorState.b.value = val.rgba.b
-                colorState.a.value = val.rgba.a
+                if (tinycolor(val.hex).toString() !== tinycolor(colorState.hex.value).toString()) {
+                    // 只有 hex 代表的颜色不同才同步，像这种手动输入了 #fEF 等价于 #ffeeff 就不同步
+                    colorState.hex.value = val.hex
+                }
+                colorState.r.value = val.rgba.r.toString()
+                colorState.g.value = val.rgba.g.toString()
+                colorState.b.value = val.rgba.b.toString()
+                colorState.a.value = val.rgba.a.toString()
                 validate(colorState)
             })
 
             return {
                 colorState,
-                handleChange,
+                handleInput,
             }
 
             // 处理手动输入颜色
-            function handleChange ({ key, value }) {
+            function handleInput ({ key, value }) {
                 colorState[key].value = value
 
-                if (!validate(colorState)) {
-                    return
+                if (validate(colorState)) {
+                    const colorStr = key === 'hex'
+                        ? colorState.hex.value
+                        : `rgba(${colorState.r.value}, ${colorState.g.value}, ${colorState.b.value}, ${colorState.a.value})`
+                    context.emit('colorChange', colorStr)
                 }
-
-                const colorStr = key === 'hex'
-                    ? colorState.hex.value
-                    : `rgba(${colorState.r.value}, ${colorState.g.value}, ${colorState.b.value}, ${colorState.a.value})`
-                context.emit('colorChange', colorStr)
             }
 
             // 根据输入的表单判断输入值是否合法
@@ -69,20 +71,16 @@
                 let result = true
                 const { hex, r, g, b, a } = colorState
                 // hex
-                if (hex.value === '') {
+                if (hex.value.startsWith('#')
+                    && (hex.value.length === 4 || hex.value.length === 7)
+                    && !hex.value.slice(1).match(/[^0-9a-fA-F]/)) {
                     hex.error = false
                 } else {
-                    const hexCore = hex.value.slice(1)
-                    const { length } = hexCore
-                    if (hex.value.startsWith('#') && (length === 3 || length === 6) && !hexCore.match(/[^0-9a-fA-F]/)) {
-                        hex.error = false
-                    } else {
-                        hex.error = true
-                        result = false
-                    }
+                    hex.error = true
+                    result = false
                 }
                 // a
-                if (a.value >= 0 && a.value <= 1) {
+                if (a.value !== '' && a.value >= 0 && a.value <= 1) {
                     a.error = false
                 } else {
                     a.error = true
@@ -91,7 +89,7 @@
                 // r g b
                 for (const colorInfo of [r, g, b]) {
                     const { value } = colorInfo
-                    if (value >= 0 && value <= 255) {
+                    if (value !== '' && value >= 0 && value <= 255) {
                         colorInfo.error = false
                     } else {
                         colorInfo.error = true

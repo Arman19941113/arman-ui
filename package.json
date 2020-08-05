@@ -8,12 +8,11 @@
     ],
     "scripts": {
         "start": "node scripts/start.js",
-        "build": "rm -rf web && node scripts/build.js",
-        "publish": "rm -rf arman-ui-npm/lib && gulp",
+        "build": "rm -rf web arman-ui-npm/lib arman-ui-npm/dist && node scripts/build.js && gulp",
+        "build:web": "rm -rf web && node scripts/build.js",
+        "build:npm": "rm -rf arman-ui-npm/lib arman-ui-npm/dist && gulp",
         "lib": "rm -rf arman-ui-npm/lib && gulp libTask",
-        "dist": "gulp distTask",
-        "dist:src": "gulp iifeTaskSrc",
-        "dist:min": "gulp iifeTaskMin"
+        "dist": "rm -rf arman-ui-npm/dist && gulp distTask"
     },
     "repository": "https://github.com/Arman19941113/arman-ui",
     "homepage": "https://github.com/Arman19941113/arman-ui#readme",

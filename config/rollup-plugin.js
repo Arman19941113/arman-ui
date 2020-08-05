@@ -27,7 +27,7 @@ module.exports = function (type, name) {
             entries: type === 'lib' ? [{ find: '@', replacement: path.resolve('src') }] : [
                 { find: '@', replacement: path.resolve('src') },
                 { find: 'arman-ui/lib/icon', replacement: path.resolve('src/components/icon') },
-                { find: 'arman-ui/lib/popper', replacement: path.resolve('src/components/icon') },
+                { find: 'arman-ui/lib/popper', replacement: path.resolve('src/components/popper') },
             ],
         }),
         rollupResolve(),
@@ -50,7 +50,7 @@ module.exports = function (type, name) {
             plugins: basePostcssPlugins.concat(require('cssnano')),
             extract: path.resolve('arman-ui-npm/dist/arman-ui.min.css'),
         }),
-        type.includes('dist_esm') && rollupPostcss({ inject: false }),
+        type.includes('dist_esm') && rollupPostcss({ inject: false }), // esm 不打包 css 以避免重复打包 css 文件
         rollupBabel({
             presets: [
                 // First, we're setting "modules": false, otherwise Babel will convert our modules to CommonJS before Rollup gets a chance to do its thing

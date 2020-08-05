@@ -24,28 +24,34 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
         <link rel="stylesheet" href="https://unpkg.com/arman-ui/dist/arman-ui.min.css">
+        <style>*{box-sizing: border-box;outline: none;}</style>
     </head>
     <body>
-        <div id="app"></div>
+        <div id="app" style="display: flex;flex-flow: column;justify-content: space-around;align-items: center;height: 200px;"></div>
         <script src="https://unpkg.com/vue@3.0.0-beta.14/dist/vue.global.prod.js"></script>
-        <script>
-            const App = {
-                template: `
-                    <div style="display: flex;flex-flow: column;justify-content: space-around;align-items: center;height: 200px;">
-                        <AIcon name="lighting" width="64" style="margin-top: 20px;"></AIcon>
-                        <div style="display: flex;justify-content: center">
-                            <AButton style="margin-right: 40px;">你好</AButton>
-                            <AButton theme="primary">世界</AButton>
-                        </div>
-                    </div>
-                `,
-            }
-            const appInstance = Vue.createApp(App)
-            window.appInstance = appInstance
-        </script>
         <script src="https://unpkg.com/arman-ui/dist/arman-ui.iife.min.js"></script>
         <script>
-            appInstance.mount('#app')
+            window.process = { env: { NODE_ENV: "development" } }
+            const App = {
+                template: `
+                    <AIcon name="lighting" width="64" style="margin-top: 20px;"></AIcon>
+                    <AColorPicker v-model="color"></AColorPicker>
+                    <div style="display: flex;justify-content: center">
+                        <AButton :style="{ 'margin-right': '40px', color }" @click="count--">你好</AButton>
+                        <AInput v-model="count" style="margin-right: 40px;"></AInput>
+                        <AButton theme="primary" @click="count++">世界</AButton>
+                    </div>
+                `,
+                setup () {
+                    return {
+                        color: Vue.ref('#666'),
+                        count: Vue.ref(0),
+                    }
+                }
+            }
+            const app = Vue.createApp(App)
+            app.use(ArmanUI)
+            app.mount('#app')
         </script>
     </body>
 </html>

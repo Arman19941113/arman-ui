@@ -1,0 +1,42 @@
+.a-popper {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  @-webkit-keyframes transitionDropIn {
+    0% {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+}
+
+.a-popper .a-popper-container {
+  transform-origin: top;
+}
+
+.a-popper .drop-enter-active {
+  -webkit-animation: transitionDropIn .2s ease-in-out;
+  animation: transitionDropIn .2s ease-in-out;
+}
+
+.a-popper .drop-leave-active {
+  animation: transitionDropIn .2s ease-in-out reverse;
+}
+
+@keyframes transitionDropIn {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}

@@ -79,6 +79,5 @@
 | type | 加载图标类型 | String | ['default', 'linear', 'wave', 'dots'] | 'default' |
 | width | 加载图标大小 | [Number, String] | - | 40 |
 | global | 是否整页加载 | Boolean | [true, false] | false |
-| index | 样式层级 | String | - | '2000' |
 | background | 遮罩层背景 | String | - | 'rgba(255, 255, 255, .8)' |
 | text | 加载文字 | String | - | '' |

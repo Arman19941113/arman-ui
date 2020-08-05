@@ -12,10 +12,10 @@ yarn install
 yarn start
 ```
 
-## 打包
+## 应用打包
 
 ```
-yarn build
+yarn build:web
 ```
 
 ## 打包后部署预览
@@ -25,13 +25,13 @@ cd web-server
 node server.js
 ```
 
-## 打包组件库
+## NPM打包
 
 ```
-yarn run publish
+yarn build:npm
 ```
 
-## 组件库发包
+## NPM发包
 
 ```
 cd arman-ui-npm

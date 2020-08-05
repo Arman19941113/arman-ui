@@ -1,6 +1,6 @@
 {
     "name": "arman-ui",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "description": "arman-ui",
     "keywords": [
         "vue", "vue3"
@@ -20,6 +20,6 @@
         "tinycolor2": "^1.4.1"
     },
     "peerDependencies": {
-        "vue": "3.0.0-rc.4"
+        "vue": "^3.0.0-rc.4"
     }
 }

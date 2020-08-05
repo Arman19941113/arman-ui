@@ -4,7 +4,7 @@
             :class="['a-color-picker-input-value', colorInfo.error && 'error']"
             :value="colorInfo.value"
             @keydown.native.tab="handleTab"
-            @change="handleChange">
+            @input="handleInput">
         <span class="a-color-picker-input-text">{{colorInfo.name}}</span>
     </div>
 </template>
@@ -20,7 +20,7 @@
         },
         setup (props, context) {
             return {
-                handleTab, handleChange,
+                handleTab, handleInput,
             }
 
             function handleTab () {
@@ -29,7 +29,7 @@
                 }
             }
 
-            function handleChange (e) {
+            function handleInput (e) {
                 const { key } = props.colorInfo
                 const value = e.target.value
 
